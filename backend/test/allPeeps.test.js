@@ -34,4 +34,16 @@ describe(`Tests for allPeeps route`, () => {
 		expect(res.body).to.have.length(samplePeeps.length);
 		expect(res.body).to.be.an("array");
 	})
+
+	it(`/GET to /allPeeps route should return status 400 and an error message if there are no peeps`, async () => {
+		await Peep.deleteMany();
+		const res = await chai.request(server)
+			.get(path)
+			.send();
+
+		expect(res).to.have.status(400);
+		expect(res.body).to.be.a("string", "no peeps found");
+	})
+
+
 })
