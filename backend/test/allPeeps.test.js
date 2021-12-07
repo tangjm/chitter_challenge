@@ -6,6 +6,7 @@ const server = require('../server');
 const samplePeeps = require('./testData/samplePeeps.json');
 
 chai.use(chaiHttp);
+const path = '/allPeeps';
 
 describe(`Tests for allPeeps route`, () => {
 	beforeEach(async () => {
@@ -24,9 +25,9 @@ describe(`Tests for allPeeps route`, () => {
 			})
 	})
 
-	test(`/GET to /allPeeps route should return status 200 and an array of peeps with the correct length`, () => {
-		const res = chai.request(server)
-			.get(`/allPeeps`)
+	it(`/GET to /allPeeps route should return status 200 and an array of peeps with the correct length`, async () => {
+		const res = await chai.request(server)
+			.get(path)
 			.send();
 
 		expect(res).to.have.status(200);

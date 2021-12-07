@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const express = require('express');
 
+const allPeepsRouter = require('./routes/allPeeps');
 const host = process.env.HOST;
 const port = process.env.PORT;
 const app = express();
@@ -12,7 +13,7 @@ app.use(express.json());
 
 // routes
 // app.use(`/`, homeRoute);
-app.use(`/allPeeps`, allPeepsRoute);
+app.use(`/allPeeps`, allPeepsRouter);
 
 
 const main = async () => {
@@ -27,3 +28,5 @@ const server = app.listen(port, host, () => {
 	const serverPORT = server.address().port;
 	console.log(`NodeServer at: http://${serverHOST}:${serverPORT}/`);
 })
+
+module.exports = server;
