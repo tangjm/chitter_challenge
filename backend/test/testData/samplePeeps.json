@@ -1,0 +1,35 @@
+[
+	{
+		"message": "I had a great day today learning about mongoose and MongoDB",
+		"sender": {
+			"name": "jared",
+			"username": "tangjm"
+		},
+		"date": "2019-10-27T00:00:00.000Z",
+		"metaData": {
+			"isReply": false
+		}
+	},
+	{
+		"message": "I thought the recent climate change summit could have been more productive.",
+		"sender": {
+			"name": "jason",
+			"username": "jason2000"
+		},
+		"date": "2021-10-19T00:00:00.000Z",
+		"metaData": {
+			"isReply": false
+		}
+	},
+	{
+		"message": "Christmas is approaching. Tis the season to be jolly!",
+		"sender": {
+			"name": "anonymous",
+			"username": "anon88"
+		},
+		"date": "2021-12-07T00:00:00.000Z",
+		"metaData": {
+			"isReply": false
+		}
+	}
+]
