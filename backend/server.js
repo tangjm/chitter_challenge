@@ -12,7 +12,7 @@ app.use(express.json());
 
 // routes
 // app.use(`/`, homeRoute);
-// app.use(`/`, allPeepsRoute);
+app.use(`/allPeeps`, allPeepsRoute);
 
 
 const main = async () => {
