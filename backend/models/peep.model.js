@@ -11,7 +11,7 @@ const peepSchema = new Schema({
 		username: { type: String, required: true }
 	},
 	date: { type: Date, required: true, match: [isoDateRegex, "invalid date"] },
-	peepMetaData: {
+	metaData: {
 		isReply: { type: Boolean, required: true },
 		recipientPeepId: { type: String }
 	}
