@@ -21,7 +21,7 @@ const testPeep = {
 	}
 }
 
-describe(`Tests for allPeep route`, () => {
+describe(`Tests for addPeep route`, () => {
 	beforeEach(async () => {
 		await Peep.deleteMany()
 			.then(() => console.log(`Emptied DB`))
@@ -58,179 +58,178 @@ describe(`Tests for allPeep route`, () => {
 		expect(res.body).to.have.property("message", "invalid peep");
 	})
 
+	describe(`Tests for missing Peeps`, () => {
+		it(`/POST to /addPeeps route should return status 400 and an error if Message is missing`, async () => {
+			const res = await chai.request(server)
+				.post(path)
+				.send(missingPeeps.noMessage);
 
+			expect(res).to.have.status(400);
+			expect(res.body).to.be.an("object");
+			expect(res.body).to.have.property("message", "invalid peep");
+		})
 
-})
-describe(`Tests for missing Peeps`, () => {
-	it(`/POST to /addPeeps route should return status 400 and an error if Message is missing`, async () => {
-		const res = await chai.request(server)
-			.post(path)
-			.send(missingPeeps.noMessage);
+		it(`/POST to /addPeeps route should return status 400 and an error if Sender is missing`, async () => {
+			const res = await chai.request(server)
+				.post(path)
+				.send(missingPeeps.noSender);
 
-		expect(res).to.have.status(400);
-		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("message", "invalid peep");
+			expect(res).to.have.status(400);
+			expect(res.body).to.be.an("object");
+			expect(res.body).to.have.property("message", "invalid peep");
+		})
+
+		it(`/POST to /addPeeps route should return status 400 and an error if Name is missing`, async () => {
+			const res = await chai.request(server)
+				.post(path)
+				.send(missingPeeps.noName);
+
+			expect(res).to.have.status(400);
+			expect(res.body).to.be.an("object");
+			expect(res.body).to.have.property("message", "invalid peep");
+		})
+
+		it(`/POST to /addPeeps route should return status 400 and an error if Username is missing`, async () => {
+			const res = await chai.request(server)
+				.post(path)
+				.send(missingPeeps.noUsername);
+
+			expect(res).to.have.status(400);
+			expect(res.body).to.be.an("object");
+			expect(res.body).to.have.property("message", "invalid peep");
+		})
+
+		it(`/POST to /addPeeps route should return status 400 and an error if Date is missing`, async () => {
+			const res = await chai.request(server)
+				.post(path)
+				.send(missingPeeps.noDate);
+
+			expect(res).to.have.status(400);
+			expect(res.body).to.be.an("object");
+			expect(res.body).to.have.property("message", "invalid peep");
+		})
+
+		it(`/POST to /addPeeps route should return status 400 and an error if MetaData is missing`, async () => {
+			const res = await chai.request(server)
+				.post(path)
+				.send(missingPeeps.noMetaData);
+
+			expect(res).to.have.status(400);
+			expect(res.body).to.be.an("object");
+			expect(res.body).to.have.property("message", "invalid peep");
+		})
+
+		it(`/POST to /addPeeps route should return status 400 and an error if isReply is missing`, async () => {
+			const res = await chai.request(server)
+				.post(path)
+				.send(missingPeeps.noIsReplyKey);
+
+			expect(res).to.have.status(400);
+			expect(res.body).to.be.an("object");
+			expect(res.body).to.have.property("message", "invalid peep");
+		})
 	})
 
-	it(`/POST to /addPeeps route should return status 400 and an error if Sender is missing`, async () => {
-		const res = await chai.request(server)
-			.post(path)
-			.send(missingPeeps.noSender);
+	describe(`Tests for invalid Peeps`, () => {
+		it(`/POST to /addPeeps route should return status 400 and an error if Message is invalid`, async () => {
+			await Peep.deleteMany();
+			const res = await chai.request(server)
+				.post(path)
+				.send(invalidPeeps.invalidMessage);
 
-		expect(res).to.have.status(400);
-		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("message", "invalid peep");
-	})
+			expect(res).to.have.status(400);
+			expect(res.body).to.be.an("object");
+			expect(res.body).to.have.property("message", "invalid peep");
+		})
 
-	it(`/POST to /addPeeps route should return status 400 and an error if Name is missing`, async () => {
-		const res = await chai.request(server)
-			.post(path)
-			.send(missingPeeps.noName);
+		xit(`/POST to /addPeeps route should return status 400 and an error if Sender is invalid`, async () => {
+			await Peep.deleteMany();
+			const res = await chai.request(server)
+				.post(path)
+				.send(invalidPeeps.invalidSender);
 
-		expect(res).to.have.status(400);
-		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("message", "invalid peep");
-	})
+			expect(res).to.have.status(400);
+			expect(res.body).to.be.an("object");
+			expect(res.body).to.have.property("message", "invalid peep");
+		})
 
-	it(`/POST to /addPeeps route should return status 400 and an error if Username is missing`, async () => {
-		const res = await chai.request(server)
-			.post(path)
-			.send(missingPeeps.noUsername);
+		it(`/POST to /addPeeps route should return status 400 and an error if Name is invalid`, async () => {
+			await Peep.deleteMany();
+			const res = await chai.request(server)
+				.post(path)
+				.send(invalidPeeps.invalidName);
 
-		expect(res).to.have.status(400);
-		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("message", "invalid peep");
-	})
+			expect(res).to.have.status(400);
+			expect(res.body).to.be.an("object");
+			expect(res.body).to.have.property("message", "invalid peep");
+		})
 
-	it(`/POST to /addPeeps route should return status 400 and an error if Date is missing`, async () => {
-		const res = await chai.request(server)
-			.post(path)
-			.send(missingPeeps.noDate);
+		it(`/POST to /addPeeps route should return status 400 and an error if Username is invalid`, async () => {
+			await Peep.deleteMany();
+			const res = await chai.request(server)
+				.post(path)
+				.send(invalidPeeps.invalidUsername);
 
-		expect(res).to.have.status(400);
-		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("message", "invalid peep");
-	})
+			expect(res).to.have.status(400);
+			expect(res.body).to.be.an("object");
+			expect(res.body).to.have.property("message", "invalid peep");
+		})
 
-	it(`/POST to /addPeeps route should return status 400 and an error if MetaData is missing`, async () => {
-		const res = await chai.request(server)
-			.post(path)
-			.send(missingPeeps.noMetaData);
+		it(`/POST to /addPeeps route should return status 400 and an error if Date is invalid`, async () => {
+			await Peep.deleteMany();
+			const res = await chai.request(server)
+				.post(path)
+				.send(invalidPeeps.invalidDate);
 
-		expect(res).to.have.status(400);
-		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("message", "invalid peep");
-	})
+			expect(res).to.have.status(400);
+			expect(res.body).to.be.an("object");
+			expect(res.body).to.have.property("message", "invalid peep");
+		})
 
-	it(`/POST to /addPeeps route should return status 400 and an error if isReply is missing`, async () => {
-		const res = await chai.request(server)
-			.post(path)
-			.send(missingPeeps.noIsReplyKey);
+		it(`/POST to /addPeeps route should return status 400 and an error if MetaData is invalid`, async () => {
+			await Peep.deleteMany();
+			const res = await chai.request(server)
+				.post(path)
+				.send(invalidPeeps.invalidMetaData);
 
-		expect(res).to.have.status(400);
-		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("message", "invalid peep");
-	})
-})
+			expect(res).to.have.status(400);
+			expect(res.body).to.be.an("object");
+			expect(res.body).to.have.property("message", "invalid peep");
+		})
 
-describe(`Tests for invalid Peeps`, () => {
+		it(`/POST to /addPeeps route should return status 400 and an error if isReply is a string`, async () => {
+			await Peep.deleteMany();
+			const res = await chai.request(server)
+				.post(path)
+				.send(invalidPeeps.invalidIsReplyKey);
 
-	it(`/POST to /addPeeps route should return status 400 and an error if Message is invalid`, async () => {
-		await Peep.deleteMany();
-		const res = await chai.request(server)
-			.post(path)
-			.send(invalidPeeps.invalidMessage);
+			expect(res).to.have.status(400);
+			expect(res.body).to.be.an("object");
+			expect(res.body).to.have.property("message", "invalid peep");
+		})
 
-		expect(res).to.have.status(400);
-		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("message", "invalid peep");
-	})
+		it(`/POST to /addPeeps route should return status 400 and an error if isReply is "true"`, async () => {
+			await Peep.deleteMany();
+			const res = await chai.request(server)
+				.post(path)
+				.send(invalidPeeps.invalidIsReplyKey2);
 
-	it(`/POST to /addPeeps route should return status 400 and an error if Sender is invalid`, async () => {
-		await Peep.deleteMany();
-		const res = await chai.request(server)
-			.post(path)
-			.send(invalidPeeps.invalidSender);
+			expect(res).to.have.status(400);
+			expect(res.body).to.be.an("object");
+			expect(res.body).to.have.property("message", "invalid peep");
+		})
 
-		expect(res).to.have.status(400);
-		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("message", "invalid peep");
-	})
+		it(`/POST to /addPeeps route should return status 400 and an error if RecipientPeepId is invalid`, async () => {
+			await Peep.deleteMany();
+			const res = await chai.request(server)
+				.post(path)
+				.send(invalidPeeps.invalidRecipientPeepId);
 
-	it(`/POST to /addPeeps route should return status 400 and an error if Name is invalid`, async () => {
-		await Peep.deleteMany();
-		const res = await chai.request(server)
-			.post(path)
-			.send(invalidPeeps.invalidName);
-
-		expect(res).to.have.status(400);
-		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("message", "invalid peep");
-	})
-
-	it(`/POST to /addPeeps route should return status 400 and an error if Username is invalid`, async () => {
-		await Peep.deleteMany();
-		const res = await chai.request(server)
-			.post(path)
-			.send(invalidPeeps.invalidUsername);
-
-		expect(res).to.have.status(400);
-		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("message", "invalid peep");
-	})
-
-	it(`/POST to /addPeeps route should return status 400 and an error if Date is invalid`, async () => {
-		await Peep.deleteMany();
-		const res = await chai.request(server)
-			.post(path)
-			.send(invalidPeeps.invalidDate);
-
-		expect(res).to.have.status(400);
-		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("message", "invalid peep");
-	})
-
-	it(`/POST to /addPeeps route should return status 400 and an error if MetaData is invalid`, async () => {
-		await Peep.deleteMany();
-		const res = await chai.request(server)
-			.post(path)
-			.send(invalidPeeps.invalidMetaData);
-
-		expect(res).to.have.status(400);
-		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("message", "invalid peep");
-	})
-
-	it(`/POST to /addPeeps route should return status 400 and an error if isReply is a string`, async () => {
-		await Peep.deleteMany();
-		const res = await chai.request(server)
-			.post(path)
-			.send(invalidPeeps.invalidIsReplyKey);
-
-		expect(res).to.have.status(400);
-		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("message", "invalid peep");
-	})
-
-	it(`/POST to /addPeeps route should return status 400 and an error if isReply is "true"`, async () => {
-		await Peep.deleteMany();
-		const res = await chai.request(server)
-			.post(path)
-			.send(invalidPeeps.invalidIsReplyKey2);
-
-		expect(res).to.have.status(400);
-		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("message", "invalid peep");
-	})
-
-	it(`/POST to /addPeeps route should return status 400 and an error if RecipientPeepId is invalid`, async () => {
-		await Peep.deleteMany();
-		const res = await chai.request(server)
-			.post(path)
-			.send(invalidPeeps.invalidRecipientPeepId);
-
-		expect(res).to.have.status(400);
-		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("message", "invalid peep");
+			expect(res).to.have.status(400);
+			expect(res.body).to.be.an("object");
+			expect(res.body).to.have.property("message", "invalid peep");
+		})
 	})
 })
+
+

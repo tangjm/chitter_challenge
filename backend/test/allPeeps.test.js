@@ -45,6 +45,4 @@ describe(`Tests for allPeeps route`, () => {
 		expect(res.body).to.be.an("object");
 		expect(res.body).to.have.property("message", "no peeps found");
 	})
-
-
 })
