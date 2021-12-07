@@ -7,7 +7,8 @@
 		},
 		"date": "2019-10-27T00:00:00.000Z",
 		"metaData": {
-			"isReply": false
+			"isReply": false,
+			"recipientPeepId": "testId"
 		}
 	},
 	{

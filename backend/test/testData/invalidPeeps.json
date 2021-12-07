@@ -1,0 +1,101 @@
+{
+	"invalidMessage": {
+		"message": 12345,
+		"sender": {
+			"name": "testName",
+			"username": "testUsername"
+		},
+		"date": "2021-12-07T00:00:00.000Z",
+		"metaData": {
+			"isReply": false
+		}
+	},
+	"invalidSender": {
+		"message": "test message",
+		"sender": {
+			"name": "testName",
+			"username": "testUsername",
+			"lastName": "testLastName"
+		},
+		"date": "2021-12-07T00:00:00.000Z",
+		"metaData": {
+			"isReply": false
+		}
+	},
+	"invalidName": {
+		"message": "test message",
+		"sender": {
+			"name": true,
+			"username": "testUsername"
+		},
+		"date": "2021-12-07T00:00:00.000Z",
+		"metaData": {
+			"isReply": false
+		}
+	},
+	"invalidUsername": {
+		"message": "test message",
+		"sender": {
+			"name": "testName",
+			"username": 123
+		},
+		"date": "2021-12-07T00:00:00.000Z",
+		"metaData": {
+			"isReply": false
+		}
+	},
+	"invalidDate": {
+		"message": "test message",
+		"sender": {
+			"name": "testName",
+			"username": "testUsername"
+		},
+		"date": "07/12/2021",
+		"metaData": {
+			"isReply": false
+		}
+	},
+	"invalidMetaData": {
+		"message": "test message",
+		"sender": {
+			"name": "testName",
+			"username": "testUsername"
+		},
+		"date": "2021-12-07T00:00:00.000Z",
+		"metaData": []
+	},
+	"invalidIsReplyKey": {
+		"message": "test message",
+		"sender": {
+			"name": "testName",
+			"username": "testUsername"
+		},
+		"date": "2021-12-07T00:00:00.000Z",
+		"metaData": {
+			"isReply": "test"
+		}
+	},
+	"invalidIsReplyKey2": {
+		"message": "test message",
+		"sender": {
+			"name": "testName",
+			"username": "testUsername"
+		},
+		"date": "2021-12-07T00:00:00.000Z",
+		"metaData": {
+			"isReply": "true"
+		}
+	},
+	"invalidRecipientPeepId": {
+		"message": "test message",
+		"sender": {
+			"name": "testName",
+			"username": "testUsername"
+		},
+		"date": "2021-12-07T00:00:00.000Z",
+		"metaData": {
+			"isReply": "true",
+			"recipientPeepId": true
+		}
+	}
+}

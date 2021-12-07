@@ -12,7 +12,7 @@ const validationFuncArr = [
 	body("sender.username").exists().isString(),
 	body("date").exists().matches(isoDateRegex),
 	body("metaData").exists().isObject(),
-	body("metaData.isReply").exists().isBoolean(),
+	body("metaData.isReply").exists().not().isString().isBoolean(),
 	body("metaData.recipientPeepId").optional().isString()
 ]
 

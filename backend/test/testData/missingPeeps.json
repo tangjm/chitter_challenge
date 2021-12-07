@@ -1,0 +1,68 @@
+{
+	"noMessage": {
+		"sender": {
+			"name": "testName",
+			"username": "testUsername"
+		},
+		"date": "2021-12-07T00:00:00.000Z",
+		"metaData": {
+			"isReply": false
+		}
+	},
+	"noSender": {
+		"message": "test message",
+		"date": "2021-12-07T00:00:00.000Z",
+		"metaData": {
+			"isReply": false
+		}
+	},
+	"noName": {
+		"message": "test message",
+		"sender": {
+			"username": "testUsername"
+		},
+		"date": "2021-12-07T00:00:00.000Z",
+		"metaData": {
+			"isReply": false
+		}
+	},
+	"noUsername": {
+		"message": "test message",
+		"sender": {
+			"name": "testName"
+		},
+		"date": "2021-12-07T00:00:00.000Z",
+		"metaData": {
+			"isReply": false
+		}
+	},
+	"noDate": {
+		"message": "test message",
+		"sender": {
+			"name": "testName",
+			"username": "testUsername"
+		},
+		"metaData": {
+			"isReply": false
+		}
+	},
+	"noMetaData": {
+		"message": "test message",
+		"sender": {
+			"name": "testName",
+			"username": "testUsername"
+		},
+		"date": "2021-12-07T00:00:00.000Z"
+	},
+	"noIsReplyKey": {
+		"message": "test message",
+		"sender": {
+			"name": "testName",
+			"username": "testUsername"
+		},
+		"date": "2021-12-07T00:00:00.000Z",
+		"metaData": {
+			"recipientPeepId": "testId"
+		}
+	}
+}
