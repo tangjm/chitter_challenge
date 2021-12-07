@@ -42,7 +42,8 @@ describe(`Tests for allPeeps route`, () => {
 			.send();
 
 		expect(res).to.have.status(400);
-		expect(res.body).to.be.a("string", "no peeps found");
+		expect(res.body).to.be.an("object");
+		expect(res.body).to.have.property("message", "no peeps found");
 	})
 
 
