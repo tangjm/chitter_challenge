@@ -5,6 +5,7 @@ const Peep = require('../models/peep.model');
 const server = require('../server');
 const samplePeeps = require('./testData/samplePeeps.json');
 const missingPeeps = require('./testData/missingPeeps.json');
+const invalidPeeps = require('./testData/invalidPeeps.json');
 
 chai.use(chaiHttp);
 const path = '/addPeep';
@@ -200,11 +201,22 @@ describe(`Tests for invalid Peeps`, () => {
 		expect(res.body).to.have.property("message", "invalid peep");
 	})
 
-	it(`/POST to /addPeeps route should return status 400 and an error if isReply is invalid`, async () => {
+	it(`/POST to /addPeeps route should return status 400 and an error if isReply is a string`, async () => {
 		await Peep.deleteMany();
 		const res = await chai.request(server)
 			.post(path)
 			.send(invalidPeeps.invalidIsReplyKey);
+
+		expect(res).to.have.status(400);
+		expect(res.body).to.be.an("object");
+		expect(res.body).to.have.property("message", "invalid peep");
+	})
+
+	it(`/POST to /addPeeps route should return status 400 and an error if isReply is "true"`, async () => {
+		await Peep.deleteMany();
+		const res = await chai.request(server)
+			.post(path)
+			.send(invalidPeeps.invalidIsReplyKey2);
 
 		expect(res).to.have.status(400);
 		expect(res.body).to.be.an("object");
