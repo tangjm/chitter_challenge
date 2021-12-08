@@ -6,7 +6,11 @@ const server = require('../server');
 const samplePeeps = require('./testData/samplePeeps.json');
 
 chai.use(chaiHttp);
-const path = '/singlePeep';
+const path = "/singlePeep";
+
+const testId1 = "61b08a1a69be7e8ac59cc73d";
+// const testId2 = "61b08a1a69be7e8ac59cc73e";
+// const testId3 = "61b08a1a69be7e8ac59cc73f";
 
 describe(`Tests for /singlePeep route`, () => {
 	beforeEach(async () => {
@@ -26,25 +30,19 @@ describe(`Tests for /singlePeep route`, () => {
 	})
 
 	it(`/GET to /singlePeep/:id should return status 200 and an object: { peep: object, replies: array}`, async () => {
-		// Get request for single peep
-		// Peep model to query database for it's _id
-		// If found, also query the database for peeps with a metaData.recipientPeepId that matches the current peep _id
-		// Assemble these queried documents into an array
-		// Return the single peep together with the array of peeps as a json object
+
 		const res = await chai.request(server)
-			.get(`${path}/id`)
+			.get(`${path}/${testId1}`)
 			.send();
 
 		expect(res).to.have.status(200);
 		expect(res.body).to.be.an("object");
-		expect(res.body.peep).to.be.an("object");
-		// expect(res.body.replies).to.be.an("array");
 	})
 
-	xit(`/GET to /singlePeep/:id should return status 400 and an error message if no peep has that id`, async () => {
+	it(`/GET to /singlePeep/:id should return status 400 and an error message if no peep has that id`, async () => {
 		await Peep.deleteMany();
 		const res = await chai.request(server)
-			.get(`${path}/id`)
+			.get(`${path}/non-existentId`)
 			.send();
 
 		expect(res).to.have.status(400);
