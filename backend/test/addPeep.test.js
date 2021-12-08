@@ -132,7 +132,6 @@ describe(`Tests for addPeep route`, () => {
 
 	describe(`Tests for invalid Peeps`, () => {
 		it(`/POST to /addPeeps route should return status 400 and an error if Message is invalid`, async () => {
-			await Peep.deleteMany();
 			const res = await chai.request(server)
 				.post(path)
 				.send(invalidPeeps.invalidMessage);
@@ -142,8 +141,7 @@ describe(`Tests for addPeep route`, () => {
 			expect(res.body).to.have.property("message", "invalid peep");
 		})
 
-		xit(`/POST to /addPeeps route should return status 400 and an error if Sender is invalid`, async () => {
-			await Peep.deleteMany();
+		it(`/POST to /addPeeps route should return status 400 and an error if Sender is invalid`, async () => {
 			const res = await chai.request(server)
 				.post(path)
 				.send(invalidPeeps.invalidSender);
@@ -154,7 +152,6 @@ describe(`Tests for addPeep route`, () => {
 		})
 
 		it(`/POST to /addPeeps route should return status 400 and an error if Name is invalid`, async () => {
-			await Peep.deleteMany();
 			const res = await chai.request(server)
 				.post(path)
 				.send(invalidPeeps.invalidName);
@@ -165,7 +162,6 @@ describe(`Tests for addPeep route`, () => {
 		})
 
 		it(`/POST to /addPeeps route should return status 400 and an error if Username is invalid`, async () => {
-			await Peep.deleteMany();
 			const res = await chai.request(server)
 				.post(path)
 				.send(invalidPeeps.invalidUsername);
@@ -176,7 +172,6 @@ describe(`Tests for addPeep route`, () => {
 		})
 
 		it(`/POST to /addPeeps route should return status 400 and an error if Date is invalid`, async () => {
-			await Peep.deleteMany();
 			const res = await chai.request(server)
 				.post(path)
 				.send(invalidPeeps.invalidDate);
@@ -187,7 +182,6 @@ describe(`Tests for addPeep route`, () => {
 		})
 
 		it(`/POST to /addPeeps route should return status 400 and an error if MetaData is invalid`, async () => {
-			await Peep.deleteMany();
 			const res = await chai.request(server)
 				.post(path)
 				.send(invalidPeeps.invalidMetaData);
@@ -198,7 +192,6 @@ describe(`Tests for addPeep route`, () => {
 		})
 
 		it(`/POST to /addPeeps route should return status 400 and an error if isReply is a string`, async () => {
-			await Peep.deleteMany();
 			const res = await chai.request(server)
 				.post(path)
 				.send(invalidPeeps.invalidIsReplyKey);
@@ -209,7 +202,6 @@ describe(`Tests for addPeep route`, () => {
 		})
 
 		it(`/POST to /addPeeps route should return status 400 and an error if isReply is "true"`, async () => {
-			await Peep.deleteMany();
 			const res = await chai.request(server)
 				.post(path)
 				.send(invalidPeeps.invalidIsReplyKey2);
@@ -220,7 +212,6 @@ describe(`Tests for addPeep route`, () => {
 		})
 
 		it(`/POST to /addPeeps route should return status 400 and an error if RecipientPeepId is invalid`, async () => {
-			await Peep.deleteMany();
 			const res = await chai.request(server)
 				.post(path)
 				.send(invalidPeeps.invalidRecipientPeepId);
