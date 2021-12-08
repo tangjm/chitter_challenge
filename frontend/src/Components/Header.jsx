@@ -1,3 +1,4 @@
+import '../css/header.css';
 import Navbar from 'react-bootstrap/NavBar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
