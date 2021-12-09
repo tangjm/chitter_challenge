@@ -1,16 +1,16 @@
-import PropTypes from 'prop-types';
-import { useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from 'react-router-dom';
 
 const AddPeep = ({ baseUrl, user }) => {
 	const [message, setMessage] = useState(``);
 	const [date, setDate] = useState(``);
 
 	let navigate = useNavigate();
-	let path = `${baseUrl}/addPeep`;
+	let path = `${baseUrl}addPeep`;
 	const placeholderText = "Your message..."
 
 	const postPeep = async () => {
@@ -20,7 +20,7 @@ const AddPeep = ({ baseUrl, user }) => {
 				"sender": user,
 				"date": date,
 				"metaData": {
-					isReply: false
+					"isReply": false
 				}
 			})
 			if (res.status === 200) {
@@ -35,12 +35,18 @@ const AddPeep = ({ baseUrl, user }) => {
 		event.preventDefault();
 		// ensure message is not an empty string
 		if (message) {
-			const dateOfPeep = new Date().toISOString();
-			setDate(dateOfPeep);
 			return postPeep();
 		}
 		// render something to tell the user to enter a valid message
 	}
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setDate(new Date().toISOString());
+		}, 100);
+
+		return () => clearInterval(interval);
+	}, [date]);
 
 	return (
 		<div>
