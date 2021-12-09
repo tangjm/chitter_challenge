@@ -1,0 +1,14 @@
+{
+	"nonExistentEmail": {
+		"password": "password",
+		"email": "non-existent@mail.com"
+	},
+	"wrongPassword": {
+		"password": "wrongPassword",
+		"email": "jason@mail.com"
+	},
+	"badEmail": {
+		"password": "password",
+		"email": "badEmail"
+	}
+}

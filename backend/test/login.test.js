@@ -61,4 +61,14 @@ describe(`Test suite for /login route`, () => {
 		expect(res.body).to.have.property("message", "invalid password");
 	})
 
+	it(`/POST to /login should return status 400 and an error obj if email is formatted incorrectly`, async () => {
+		const res = await chai.request(server)
+			.post(`/login`)
+			.send(invalidUsers.badEmail);
+
+		expect(res).to.have.status(400);
+		expect(res.body).to.be.an("object");
+		expect(res.body).to.have.property("message", "invalid login details");
+		expect(res.body.error).to.be.an("array");
+	})
 })

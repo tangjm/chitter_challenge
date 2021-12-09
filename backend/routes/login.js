@@ -16,27 +16,33 @@ router.route(`/`)
 		if (!errorObj.isEmpty()) {
 			return res.status(400).json({
 				"message": "invalid login details",
-				"error": errorObj
+				"error": errorObj.array()
 			})
 		}
 
 		const { email, password } = req.body;
 
-		User.find({ email }, (error, user) => {
+		User.find({ email }, (error, users) => {
 			if (error) {
+				return res.status(400).json({
+					"message": "error occured"
+				})
+			}
+
+			if (!users.length) {
 				return res.status(400).json({
 					"message": "invalid email"
 				})
 			}
 
-			if (password === user[0].password) {
-				const { name, username } = user[0];
-				return res.status(200).json({ name, username });
+			if (password !== users[0].password) {
+				return res.status(400).json({
+					"message": "invalid password"
+				})
 			}
 
-			res.status(400).json({
-				"message": "invalid password"
-			})
+			const { name, username } = users[0];
+			return res.status(200).json({ name, username });
 		})
 		// POST request containing user login info
 		// Validate data using express-router
