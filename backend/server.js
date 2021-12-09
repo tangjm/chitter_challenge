@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // routes
-// app.use(`/`, homeRoute);
+
 app.use(`/allPeeps`, allPeepsRouter);
 app.use(`/addPeep`, addPeepRouter);
 app.use(`/singlePeep`, singlePeepRouter);
