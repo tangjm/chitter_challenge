@@ -41,7 +41,7 @@ describe(`Test suite for AddPeep`, () => {
 		})
 	})
 
-	describe(`Peep submission tests for AddPeep`, () => {
+	xdescribe(`Peep submission tests for AddPeep`, () => {
 		test(`it should call`, () => {
 			const labelText = /your peep:/i;
 			const actual = screen.getByLabelText(labelText);
