@@ -2,6 +2,7 @@ const { expect } = require('chai');
 const chai = require('chai')
 const chaiHttp = require('chai-http');
 const sampleUsers = require('./testData/sampleUsers.json');
+const invalidUsers = require('./testData/invalidLoginData.json');
 const server = require('../server');
 const User = require('../models/user.model');
 
@@ -38,4 +39,26 @@ describe(`Test suite for /login route`, () => {
 		expect(res.body).to.have.property("name", "jared");
 		expect(res.body).to.have.property("username", "tangjm");
 	})
+
+	it(`/POST to /login should return status 400 and an error obj if email is invalid`, async () => {
+		const res = await chai.request(server)
+			.post(`/login`)
+			.send(invalidUsers.nonExistentEmail);
+
+		expect(res).to.have.status(400);
+		expect(res.body).to.be.an("object");
+		expect(res.body).to.have.property("message", "invalid email");
+
+	})
+
+	it(`/POST to /login should return status 400 and an error obj if password is invalid`, async () => {
+		const res = await chai.request(server)
+			.post(`/login`)
+			.send(invalidUsers.wrongPassword);
+
+		expect(res).to.have.status(400);
+		expect(res.body).to.be.an("object");
+		expect(res.body).to.have.property("message", "invalid password");
+	})
+
 })
