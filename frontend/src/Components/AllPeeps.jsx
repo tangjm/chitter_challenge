@@ -19,6 +19,7 @@ const AllPeeps = ({ baseUrl }) => {
 			}
 		} catch (err) {
 			console.log(err);
+			return [];
 		}
 	}
 
@@ -47,6 +48,9 @@ const AllPeeps = ({ baseUrl }) => {
 
 		// parse the message
 		// e.g. "My name is jareads skd dafdsafa What is adsfjksdlfj\nsadjfalksd;jfklasdjf asjdf\nasdfjaskd;ljfakls;fa sdfasdfa.\n\nasdfkdsalfjasdlf @asdfma jaskdf;"
+		if (!peeps.length) {
+			return <span>No Peeps Found</span>;
+		}
 		peeps.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 		return peeps.map(peep => {
 			const { sender, date, message, _id } = peep;
