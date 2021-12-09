@@ -5,14 +5,14 @@ import Nav from 'react-bootstrap/Nav';
 
 const Header = () => {
 	return (
-		<header>
+		<header className="header">
 			<Navbar bg="primary" variant="dark">
-				<Container style={{ width: '70rem' }}>
-					<Navbar.Brand href="/" style={{ "font-size": "100%" }}>Chitter</Navbar.Brand>
-					<Nav className="me-auto">
+				<Container>
+					<Navbar.Brand href="/">Chitter</Navbar.Brand>
+					<Nav className="ms-auto">
 						<Nav.Link href="/addPeep">New Peep</Nav.Link>
-						<Nav.Link href="#features">Login</Nav.Link>
-						<Nav.Link href="#pricing">Register</Nav.Link>
+						<Nav.Link href="/login">Login</Nav.Link>
+						<Nav.Link href="/register">Register</Nav.Link>
 					</Nav>
 				</Container>
 			</Navbar>

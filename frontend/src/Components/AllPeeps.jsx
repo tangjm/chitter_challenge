@@ -60,8 +60,7 @@ const AllPeeps = ({ baseUrl }) => {
 					bg={"light"}
 					key={_id}
 					text={'dark'}
-					style={{ width: '70rem' }}
-					className="mb-3"
+					className="mb-3 allPeeps"
 				>
 					<Card.Header>
 						{`${name} @${username} ~ ${formatDate(date)} `}
