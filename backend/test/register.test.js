@@ -2,6 +2,7 @@ const { expect } = require('chai');
 const chai = require('chai')
 const chaiHttp = require('chai-http');
 const sampleUsers = require('./testData/sampleUsers.json');
+const invalidNewUsers = require('./testData/invalidSignUpData.json');
 const server = require('../server');
 const User = require('../models/user.model');
 
@@ -40,35 +41,23 @@ describe(`Test suite for /login route`, () => {
 		expect(res.body).to.have.property("message", "registration successful!");
 	})
 
-	// it(`/POST to /login should return status 400 and an error obj if email is invalid`, async () => {
-	// 	const res = await chai.request(server)
-	// 		.post(`/login`)
-	// 		.send(invalidUsers.nonExistentEmail);
+	it(`/POST to /register should return status 400 and an error obj if email is taken`, async () => {
+		const res = await chai.request(server)
+			.post(`/register`)
+			.send(invalidNewUsers.duplicateEmail);
 
-	// 	expect(res).to.have.status(400);
-	// 	expect(res.body).to.be.an("object");
-	// 	expect(res.body).to.have.property("message", "invalid email");
+		expect(res).to.have.status(400);
+		expect(res.body).to.be.an("object");
+		expect(res.body).to.have.property("message", "invalid registration details");
+	})
 
-	// })
+	it(`/POST to /register should return status 400 and an error obj if username is taken`, async () => {
+		const res = await chai.request(server)
+			.post(`/register`)
+			.send(invalidNewUsers.duplicateUsername);
 
-	// it(`/POST to /login should return status 400 and an error obj if password is invalid`, async () => {
-	// 	const res = await chai.request(server)
-	// 		.post(`/login`)
-	// 		.send(invalidUsers.wrongPassword);
-
-	// 	expect(res).to.have.status(400);
-	// 	expect(res.body).to.be.an("object");
-	// 	expect(res.body).to.have.property("message", "invalid password");
-	// })
-
-	// it(`/POST to /login should return status 400 and an error obj if email is formatted incorrectly`, async () => {
-	// 	const res = await chai.request(server)
-	// 		.post(`/login`)
-	// 		.send(invalidUsers.badEmail);
-
-	// 	expect(res).to.have.status(400);
-	// 	expect(res.body).to.be.an("object");
-	// 	expect(res.body).to.have.property("message", "invalid login details");
-	// 	expect(res.body.error).to.be.an("array");
-	// })
+		expect(res).to.have.status(400);
+		expect(res.body).to.be.an("object");
+		expect(res.body).to.have.property("message", "invalid registration details");
+	})
 })
