@@ -16,10 +16,7 @@ function App() {
     "username": "anon"
   });
 
-  const port = process.env.REACT_APP_PORT;
-  const host = process.env.REACT_APP_HOST;
-  const baseUrl = `http://${host}:${port}`;
-
+  const baseUrl = process.env.REACT_APP_NODESERVER;
 
   return (
     <div className="App-header">
@@ -28,7 +25,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<AllPeeps baseUrl={baseUrl} />} />
-          <Route path="/addPeep" element={<AddPeep baseUrl user={user} />} />
+          <Route path="/addPeep" element={<AddPeep baseUrl={baseUrl} user={user} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
