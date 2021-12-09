@@ -22,27 +22,26 @@ router.route(`/`)
 
 		const { email, password } = req.body;
 
-		User.find({ email }, (error, users) => {
+		User.findOne({ email }, (error, user) => {
 			if (error) {
 				return res.status(400).json({
 					"message": "error occured"
 				})
 			}
 
-			if (!users.length) {
+			if (!user) {
 				return res.status(400).json({
 					"message": "invalid email"
 				})
 			}
 
-			if (password !== users[0].password) {
+			if (password !== user.password) {
 				return res.status(400).json({
 					"message": "invalid password"
 				})
 			}
 
-			const { name, username } = users[0];
-			return res.status(200).json({ name, username });
+			return res.status(200).json({ user });
 		})
 		// POST request containing user login info
 		// Validate data using express-router

@@ -29,15 +29,14 @@ describe(`Test suite for /login route`, () => {
 			})
 	})
 
-	it(`/POST to /login should return status 200 and an object with 2 keys: name and username`, async () => {
+	it(`/POST to /login should return status 200 and a user object`, async () => {
 		const res = await chai.request(server)
 			.post(`/login`)
 			.send(testUser)
 
 		expect(res).to.have.status(200);
 		expect(res.body).to.be.an("object");
-		expect(res.body).to.have.property("name", "jared");
-		expect(res.body).to.have.property("username", "tangjm");
+		expect(res.body).to.have.property("user");
 	})
 
 	it(`/POST to /login should return status 400 and an error obj if email is invalid`, async () => {
