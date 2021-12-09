@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 
 const AllPeeps = ({ baseUrl }) => {
 	const jsonServer = `http://localhost:4000/allPeeps`;
-	const path = `${baseUrl}/allPeeps`;
+	const path = `${baseUrl}allPeeps`;
 	const servers = [jsonServer, path];
 
 	const [peeps, setPeeps] = useState([]);
