@@ -1,0 +1,14 @@
+{
+	"duplicateEmail": {
+		"name": "test",
+		"username": "testUsername",
+		"email": "jared@mail.com",
+		"password": "password"
+	},
+	"duplicateUsername": {
+		"name": "test",
+		"username": "testUsername",
+		"email": "jared@mail.com",
+		"password": "password"
+	}
+}
