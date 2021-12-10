@@ -13,5 +13,29 @@ describe(`Test suite for Register component`, () => {
 			const actual = screen.getByText(/sign up/i);
 			expect(actual).toBeInTheDocument();
 		})
+		// test(`it should display an email input`, () => {
+		// 	render(<Register />);
+
+		// 	const actual = screen.getByText(/sign up/i);
+		// 	expect(actual).toBeInTheDocument();
+		// })
+		// test(`it should display a name input field`, () => {
+		// 	render(<Register />);
+
+		// 	const actual = screen.getByText(/sign up/i);
+		// 	expect(actual).toBeInTheDocument();
+		// })
+		// test(`it should display a username input field`, () => {
+		// 	render(<Register />);
+
+		// 	const actual = screen.getByText(/sign up/i);
+		// 	expect(actual).toBeInTheDocument();
+		// })
+		// test(`it should display a password input field`, () => {
+		// 	render(<Register />);
+
+		// 	const actual = screen.getByText(/sign up/i);
+		// 	expect(actual).toBeInTheDocument();
+		// })
 	})
 })
