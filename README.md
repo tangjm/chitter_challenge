@@ -28,7 +28,7 @@ Postman
 ## Simple Wireframe
 ---
 
-![components](wireframes\components.png)
+![components](wireframes/components.png)
 
 ## Technologies used
 ---
