@@ -10,7 +10,6 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 const Register = ({ baseUrl }) => {
-	// const [validated, setValidated] = useState(false);
 	const [name, setName] = useState(``);
 	const [username, setUsername] = useState(``);
 	const [email, setEmail] = useState(``);
@@ -24,13 +23,13 @@ const Register = ({ baseUrl }) => {
 				username: username,
 				email: email,
 				password: password
-			})
+			});
+
 			if (res.status === 200) {
 				return navigate(`/login`);
 			}
-			if (res.status === 400) {
 
-			}
+			if (res.status === 400) { }
 		} catch (err) {
 			console.log(err);
 		}
@@ -40,7 +39,6 @@ const Register = ({ baseUrl }) => {
 		event.preventDefault();
 		registerUser();
 	}
-
 
 	return (
 		<>
