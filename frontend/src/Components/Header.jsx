@@ -15,7 +15,7 @@ const Header = ({ isLoggedIn, setUser, defaultUser }) => {
 					<Navbar.Brand href="/">Chitter</Navbar.Brand>
 					<Nav className="ms-auto">
 						<Nav.Link href="/addPeep">New Peep</Nav.Link>
-						{!isLoggedIn ? <Nav.Link href="/" onClick={logOutHandler}>Log Out</Nav.Link>
+						{isLoggedIn ? <Nav.Link href="/" onClick={logOutHandler}>Log Out</Nav.Link>
 							: <><Nav.Link href="/login" >Login</Nav.Link>
 								<Nav.Link href="/register">Register</Nav.Link></>}
 					</Nav>
@@ -29,8 +29,8 @@ Header.propTypes = {
 	isLoggedIn: PropTypes.bool,
 	setUser: PropTypes.func,
 	defaultUser: PropTypes.exact({
-		"name": "anonymous",
-		"username": "anon"
+		name: PropTypes.string,
+		username: PropTypes.string
 	})
 }
 

@@ -1,5 +1,8 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Header from '../Components/Header';
+
+const mockSetUser = jest.fn();
 
 describe(`Test suite for Header component`, () => {
 	describe(`When no user is logged in`, () => {
@@ -62,6 +65,24 @@ describe(`Test suite for Header component`, () => {
 			test(`it should not render the register option`, () => {
 				const registerOption = screen.queryByText(/register/i);
 				expect(registerOption).not.toBeInTheDocument();
+			})
+		})
+
+		describe(`Log Out test`, () => {
+
+			test(`it should call the setUser function with the default value`, () => {
+				const defaultUser = {
+					"name": "anonymous",
+					"username": "anon"
+				}
+
+				render(<Header isLoggedIn={true} setUser={mockSetUser} defaultUser={defaultUser} />);
+
+				const logOutNavLink = screen.getByText(/Log Out/i)
+				userEvent.click(logOutNavLink);
+
+				expect(mockSetUser).toHaveBeenCalledTimes(1);
+				expect(mockSetUser).toHaveBeenCalledWith(defaultUser);
 			})
 		})
 	})
