@@ -43,15 +43,6 @@ router.route(`/`)
 
 			return res.status(200).json({ user });
 		})
-		// POST request containing user login info
-		// Validate data using express-router
-		// Use mongoose User model to query database for a matching email
-		// If a match exists, check the password
-		// If the password matches, return status 200
-		// and {"name": req.body.name, "username": req.body.username}
-		// If email is not found, return a json with "email not found"
-		// If password doesn't match, return a json saying so
-		// React should navigate to `/` once a res object is received
 	})
 
 module.exports = router;

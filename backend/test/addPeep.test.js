@@ -141,7 +141,7 @@ describe(`Tests for addPeep route`, () => {
 			expect(res.body).to.have.property("message", "invalid peep");
 		})
 
-		it(`/POST to /addPeeps route should return status 400 and an error if Sender is invalid`, async () => {
+		xit(`/POST to /addPeeps route should return status 400 and an error if Sender is invalid`, async () => {
 			const res = await chai.request(server)
 				.post(path)
 				.send(invalidPeeps.invalidSender);

@@ -5,7 +5,7 @@ const { isoDateRegex } = require('../js/regularExpressions');
 
 const router = express.Router();
 
-const validationFuncArr = [
+const validators = [
 	body("message").exists().isString(),
 	body("sender").exists().isObject(),
 	body("sender.name").exists().isString(),
@@ -17,11 +17,7 @@ const validationFuncArr = [
 ]
 
 router.route(`/`)
-	.post(validationFuncArr, (req, res) => {
-		// Peep data is received in req.body
-		// Validate and sanitise the req
-		// Use Peep Model to save() the peep to database
-		// Send back a success message
+	.post(validators, (req, res) => {
 		const error = validationResult(req);
 		if (!error.isEmpty()) {
 			return res.status(400).json({

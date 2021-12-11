@@ -40,13 +40,6 @@ const AllPeeps = ({ baseUrl }) => {
 	}
 
 	const formatPeeps = peeps => {
-		// sort in descending order of date
-		// then generate an array of Card components 
-		// with the correct Name, Username, Date and Message
-		// and key = _id
-
-		// parse the message
-		// e.g. "My name is jareads skd dafdsafa What is adsfjksdlfj\nsadjfalksd;jfklasdjf asjdf\nasdfjaskd;ljfakls;fa sdfasdfa.\n\nasdfkdsalfjasdlf @asdfma jaskdf;"
 		if (!peeps.length) {
 			return <span>No Peeps Found</span>;
 		}

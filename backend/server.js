@@ -8,6 +8,7 @@ const allPeepsRouter = require('./routes/allPeeps');
 const singlePeepRouter = require('./routes/singlePeep')
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
+
 const host = process.env.HOST;
 const port = process.env.PORT;
 const app = express();

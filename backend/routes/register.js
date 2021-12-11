@@ -23,6 +23,7 @@ router.route(`/`)
 		}
 
 		const { email, username } = req.body;
+
 		User.findOne({ $or: [{ email }, { username }] },
 			(error, user) => {
 				if (user) {
@@ -42,13 +43,6 @@ router.route(`/`)
 					})
 				});
 			});
-		// POST request received containing user registration info
-		// Validate user info using express-validator
-		// Use Mongoose User model to instantiate a document with the received info
-		// Save that document to the database collection
-		// Return a res object with status 200 and a message telling the user that they registered successfully
-		// If any errors occur, return status 400 and an object with an error message
-		// unique username
 	})
 
 module.exports = router;
