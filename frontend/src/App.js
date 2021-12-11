@@ -28,11 +28,10 @@ function App() {
         <Routes>
           <Route path="/" element={<AllPeeps baseUrl={baseUrl} />} />
           <Route path="/addPeep" element={<AddPeep baseUrl={baseUrl} user={user} />} />
-          <Route path="/login" element={<Login baseUrl={baseUrl} setUser={setUser} />} />
+          <Route path="/login" element={<Login baseUrl={baseUrl} setUser={setUser} setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/register" element={<Register baseUrl={baseUrl} />} />
         </Routes>
       </Router>
-
     </div >
   );
 }
