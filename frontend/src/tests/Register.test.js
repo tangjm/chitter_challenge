@@ -57,5 +57,43 @@ describe(`Test suite for Register component`, () => {
 
 			expect(testElement).toHaveValue(testName);
 		})
+		test(`it should track changes to username input field`, () => {
+			const testUsername = "tester";
+			const placeholder = "Username";
+
+			render(<Register />);
+
+			const testElement = screen.getByPlaceholderText(placeholder);
+
+			userEvent.type(testElement, testUsername);
+
+			expect(testElement).toHaveValue(testUsername);
+		})
+
+		test(`it should track changes to email input field`, () => {
+			const testEmail = "tester@mail.com";
+			const placeholder = "Email";
+
+			render(<Register />);
+
+			const testElement = screen.getByPlaceholderText(placeholder);
+
+			userEvent.type(testElement, testEmail);
+
+			expect(testElement).toHaveValue(testEmail);
+		})
+
+		test(`it should track changes to password input field`, () => {
+			const testPassword = "testPass";
+			const placeholder = "Password";
+
+			render(<Register />);
+
+			const testElement = screen.getByPlaceholderText(placeholder);
+
+			userEvent.type(testElement, testPassword);
+
+			expect(testElement).toHaveValue(testPassword);
+		})
 	})
 })
