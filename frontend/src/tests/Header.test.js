@@ -1,13 +1,19 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Header from '../Components/Header';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const mockSetUser = jest.fn();
+const mockSetIsLoggedIn = jest.fn();
 
 describe(`Test suite for Header component`, () => {
 	describe(`When no user is logged in`, () => {
 		beforeEach(() => {
-			render(<Header isLoggedIn={false} />);
+			render(
+				<Router>
+					<Header isLoggedIn={false} />
+				</Router>
+			);
 		})
 
 		test(`it should render the app name: Chitter`, () => {
@@ -39,7 +45,11 @@ describe(`Test suite for Header component`, () => {
 	describe(`When some User is logged in`, () => {
 		describe(`Render tests`, () => {
 			beforeEach(() => {
-				render(<Header isLoggedIn={true} />);
+				render(
+					<Router>
+						<Header isLoggedIn={true} />
+					</Router>
+				);
 			})
 
 			test(`it should render the app name: Chitter`, () => {
@@ -69,20 +79,40 @@ describe(`Test suite for Header component`, () => {
 		})
 
 		describe(`Log Out test`, () => {
-
-			test(`it should call the setUser function with the default value`, () => {
-				const defaultUser = {
+			let defaultUser;
+			beforeEach(() => {
+				defaultUser = {
 					"name": "anonymous",
 					"username": "anon"
 				}
 
-				render(<Header isLoggedIn={true} setUser={mockSetUser} defaultUser={defaultUser} />);
+				render(
+					<Router>
+						<Header isLoggedIn={true} setUser={mockSetUser} defaultUser={defaultUser} setIsLoggedIn={mockSetIsLoggedIn} />
+					</Router>
+				);
+			})
 
+			afterEach(() => {
+				defaultUser = null;
+			})
+
+			test(`it should call the setUser function with the default value`, () => {
 				const logOutNavLink = screen.getByText(/Log Out/i)
+
 				userEvent.click(logOutNavLink);
 
 				expect(mockSetUser).toHaveBeenCalledTimes(1);
 				expect(mockSetUser).toHaveBeenCalledWith(defaultUser);
+			})
+
+			test(`it should set the isLoggedIn state to false`, () => {
+				const logOutNavLink = screen.getByText(/Log Out/i)
+
+				userEvent.click(logOutNavLink);
+
+				expect(mockSetIsLoggedIn).toHaveBeenCalledTimes(1);
+				expect(mockSetIsLoggedIn).toHaveBeenCalledWith(false);
 			})
 		})
 	})

@@ -5,9 +5,12 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import { LinkContainer } from 'react-router-bootstrap';
 
-const Header = ({ isLoggedIn, setUser, defaultUser }) => {
+const Header = ({ isLoggedIn, setIsLoggedIn, setUser, defaultUser }) => {
 
-	const logOutHandler = event => setUser(defaultUser);
+	const logOutHandler = event => {
+		setIsLoggedIn(false);
+		setUser(defaultUser);
+	}
 
 	return (
 		<header className="header">
@@ -26,7 +29,7 @@ const Header = ({ isLoggedIn, setUser, defaultUser }) => {
 							</LinkContainer>
 							: <>
 								<LinkContainer to="/login">
-									<Nav.Link  >Login</Nav.Link>
+									<Nav.Link>Login</Nav.Link>
 								</LinkContainer>
 								<LinkContainer to="/register">
 									<Nav.Link>Register</Nav.Link>
@@ -41,6 +44,7 @@ const Header = ({ isLoggedIn, setUser, defaultUser }) => {
 
 Header.propTypes = {
 	isLoggedIn: PropTypes.bool,
+	setIsLoggedIn: PropTypes.func,
 	setUser: PropTypes.func,
 	defaultUser: PropTypes.exact({
 		name: PropTypes.string,
