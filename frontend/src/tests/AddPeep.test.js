@@ -6,9 +6,11 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 describe(`Test suite for AddPeep`, () => {
 	beforeEach(() => {
-		render(<Router>
-			<AddPeep />
-		</Router>);
+		render(
+			<Router>
+				<AddPeep />
+			</Router>
+		);
 	})
 
 	describe(`Render tests for AddPeep`, () => {
