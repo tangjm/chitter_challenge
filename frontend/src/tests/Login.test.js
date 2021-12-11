@@ -30,28 +30,7 @@ describe(`Test suite for Login component`, () => {
 		})
 	})
 
-	xdescribe(`Form manipulation tests`, () => {
-		test(`it should track changes to name input field`, () => {
-			const testName = "tester";
-			const placeholder = "Name";
-
-			const testElement = screen.getByPlaceholderText(placeholder);
-
-			userEvent.type(testElement, testName);
-
-			expect(testElement).toHaveValue(testName);
-		})
-		test(`it should track changes to username input field`, () => {
-			const testUsername = "tester";
-			const placeholder = "Username";
-
-			const testElement = screen.getByPlaceholderText(placeholder);
-
-			userEvent.type(testElement, testUsername);
-
-			expect(testElement).toHaveValue(testUsername);
-		})
-
+	describe(`Form manipulation tests`, () => {
 		test(`it should track changes to email input field`, () => {
 			const testEmail = "tester@mail.com";
 			const placeholder = "Email";
