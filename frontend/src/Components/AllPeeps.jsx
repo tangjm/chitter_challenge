@@ -1,21 +1,17 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 
 const AllPeeps = ({ baseUrl }) => {
-	const jsonServer = `http://localhost:4000/allPeeps`;
-	const path = `${baseUrl}/allPeeps`;
-	const servers = [jsonServer, path];
 
 	const [peeps, setPeeps] = useState([]);
+	const path = `${baseUrl}/allPeeps`;
 
 	const fetchPeeps = async () => {
 		try {
-			const res = await axios.get(servers[1]);
-			if (res.data) {
-				return res.data;
-			}
+			const res = await axios.get(path);
+			return res.data;
 		} catch (err) {
 			console.log(err);
 			return [];
@@ -23,9 +19,7 @@ const AllPeeps = ({ baseUrl }) => {
 	}
 
 	useEffect(() => {
-		const getData = async () => {
-			setPeeps(await fetchPeeps());
-		}
+		const getData = async () => setPeeps(await fetchPeeps());
 		getData();
 	}, [])
 
@@ -48,12 +42,8 @@ const AllPeeps = ({ baseUrl }) => {
 			const { sender, date, message, _id } = peep;
 			const { name, username } = sender;
 			return (
-				<Card
-					bg={"light"}
-					key={_id}
-					text={'dark'}
-					className="mb-3 allPeeps"
-				>
+				<Card bg={"light"} key={_id} text={'dark'}
+					className="mb-3 allPeeps">
 					<Card.Header>
 						{`${name} @${username} ~ ${formatDate(date)} `}
 					</Card.Header>
