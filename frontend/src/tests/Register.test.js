@@ -13,29 +13,33 @@ describe(`Test suite for Register component`, () => {
 			const actual = screen.getByText(/sign up/i);
 			expect(actual).toBeInTheDocument();
 		})
-		// test(`it should display an email input`, () => {
-		// 	render(<Register />);
 
-		// 	const actual = screen.getByText(/sign up/i);
-		// 	expect(actual).toBeInTheDocument();
-		// })
-		// test(`it should display a name input field`, () => {
-		// 	render(<Register />);
+		test(`it should display a name input field`, () => {
+			render(<Register />);
 
-		// 	const actual = screen.getByText(/sign up/i);
-		// 	expect(actual).toBeInTheDocument();
-		// })
-		// test(`it should display a username input field`, () => {
-		// 	render(<Register />);
+			const actual = screen.getByPlaceholderText(/name/i);
+			expect(actual).toBeInTheDocument();
+		})
 
-		// 	const actual = screen.getByText(/sign up/i);
-		// 	expect(actual).toBeInTheDocument();
-		// })
-		// test(`it should display a password input field`, () => {
-		// 	render(<Register />);
+		test(`it should display a username input field`, () => {
+			render(<Register />);
 
-		// 	const actual = screen.getByText(/sign up/i);
-		// 	expect(actual).toBeInTheDocument();
-		// })
+			const actual = screen.getByPlaceholderText(/username/i);
+			expect(actual).toBeInTheDocument();
+		})
+
+		test(`it should display an email input`, () => {
+			render(<Register />);
+
+			const actual = screen.getByPlaceHolderText(/email/i);
+			expect(actual).toBeInTheDocument();
+		})
+
+		test(`it should display a password input field`, () => {
+			render(<Register />);
+
+			const actual = screen.getByPlaceholderText(/password/i);
+			expect(actual).toBeInTheDocument();
+		})
 	})
 })
