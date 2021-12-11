@@ -1,0 +1,20 @@
+[
+	{
+		"name": "testName",
+		"username": "testUsername",
+		"password": "testPass",
+		"email": "test@mail.com"
+	},
+	{
+		"name": "jason",
+		"username": "jason2000",
+		"password": "password",
+		"email": "jason@mail.com"
+	},
+	{
+		"name": "anonymous",
+		"username": "anon88",
+		"password": "password",
+		"email": "anon@mail.com"
+	}
+]

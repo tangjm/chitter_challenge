@@ -2,6 +2,24 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Login from '../Components/UserValidation/Login';
 import { BrowserRouter as Router } from 'react-router-dom';
+import axios from 'axios';
+
+jest.mock(`../Components/UserValidation/ErrorModal.jsx`, () => {
+	return () => {
+		return <span>Mock ErrorModal Component</span>
+	}
+})
+
+
+// const loginSuccess = jest.spyOn(axios, `post`)
+// 	.mockImplementation(() => {
+// 		return <p>Post request success</p>;
+// 	});
+
+// const loginFailure = jest.spyOn(axios, `post`)
+// 	.mockImplementation(() => {
+// 		return <span>Mock ErrorModal Component</span>;
+// 	});
 
 describe(`Test suite for Login component`, () => {
 	beforeEach(() => {
@@ -28,7 +46,7 @@ describe(`Test suite for Login component`, () => {
 			const actual = screen.getByLabelText(/password/i);
 			expect(actual).toBeInTheDocument();
 		})
-	})
+	});
 
 	describe(`Form manipulation tests`, () => {
 		test(`it should track changes to email input field`, () => {
@@ -52,9 +70,34 @@ describe(`Test suite for Login component`, () => {
 
 			expect(testElement).toHaveValue(testPassword);
 		})
-	})
 
-	xdescribe(`Form submission tests`, () => {
+	});
 
+	describe(`Form submission tests`, () => {
+		test(`it should render an ErrorModal if email is not registered`, () => {
+			const badEmail = "badEmail@mail.com";
+			const password = "password";
+
+			const testElement = screen.getByPlaceholderText(/email/i);
+			const testElement2 = screen.getByPlaceholderText(/password/i);
+
+			userEvent.type(testElement, badEmail);
+			userEvent.type(testElement2, password);
+
+			const mockErrorModal = screen.getByText(/mock errormodal component/i);
+			expect(mockErrorModal).toBeInTheDocument();
+		})
+
+		test(`it should render an ErrorModal if email is registered but password is incorrect`, () => {
+
+		})
+
+		xtest(`it should call setUser with the correct details if login is successful`, () => {
+
+		})
+
+		xtest(`it should call setUserIsLoggedIn with true if login is successful`, () => {
+
+		})
 	})
 })

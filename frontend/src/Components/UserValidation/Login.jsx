@@ -4,29 +4,33 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-
+import ErrorModal from './ErrorModal';
 
 const Login = ({ baseUrl, setUser, setIsLoggedIn }) => {
 	const [email, setEmail] = useState(``);
 	const [password, setPassword] = useState(``);
+	const [showErrorModal, setShowErrorModal] = useState(false);
 	const navigate = useNavigate();
+	const errorTitle = "Login failed";
+	const errorMessage = "Please try again";
 
 	const loginRequest = async () => {
 		try {
 			const res = await axios.post(`${baseUrl}/login`, { email, password });
-
-			if (res.status === 200) {
-				successHandler(res.data.user);
-				return navigate(`/`);
-			}
+			return successHandler(res.data.user);
 		} catch (err) {
-			console.log(err);
+			return failureHandler();
 		}
 	}
 
 	function successHandler({ name, username }) {
 		setIsLoggedIn(true);
 		setUser({ name, username });
+		return navigate(`/`);
+	}
+
+	function failureHandler() {
+		setShowErrorModal(true);
 	}
 
 	const handleSubmit = event => {
@@ -35,27 +39,30 @@ const Login = ({ baseUrl, setUser, setIsLoggedIn }) => {
 	}
 
 	return (
-		<Form onSubmit={handleSubmit}>
-			<h2 className="mb-3">Login</h2>
+		<>
+			<ErrorModal show={showErrorModal} setShow={setShowErrorModal} errorMessage={errorMessage} errorTitle={errorTitle} />
+			<Form onSubmit={handleSubmit}>
+				<h2 className="mb-3">Login</h2>
 
-			<Form.Group className="mb-3" controlId="formBasicEmail">
-				<Form.Label>Email address</Form.Label>
-				<Form.Control type="email" placeholder="Email" onChange={event => setEmail(event.target.value)} required />
+				<Form.Group className="mb-3" controlId="formBasicEmail">
+					<Form.Label>Email address</Form.Label>
+					<Form.Control type="email" placeholder="Email" onChange={event => setEmail(event.target.value)} required />
 
-				<Form.Text className="text-muted">
-					We'll never share your email with anyone else.
-				</Form.Text>
-			</Form.Group>
+					<Form.Text className="text-muted">
+						We'll never share your email with anyone else.
+					</Form.Text>
+				</Form.Group>
 
-			<Form.Group className="mb-3" controlId="formBasicPassword">
-				<Form.Label>Password</Form.Label>
-				<Form.Control type="password" placeholder="Password" onChange={event => setPassword(event.target.value)} required />
-			</Form.Group>
+				<Form.Group className="mb-3" controlId="formBasicPassword">
+					<Form.Label>Password</Form.Label>
+					<Form.Control type="password" placeholder="Password" onChange={event => setPassword(event.target.value)} required />
+				</Form.Group>
 
-			<Button variant="primary" type="submit">
-				Login
-			</Button>
-		</Form>
+				<Button variant="primary" type="submit">
+					Login
+				</Button>
+			</Form>
+		</>
 	)
 }
 

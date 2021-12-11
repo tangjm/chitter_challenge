@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from '../src/Components/Header';
 import AddPeep from './Components/AddPeep';
 import AllPeeps from './Components/AllPeeps';
-
 import Login from './Components/UserValidation/Login';
 import Register from './Components/UserValidation/Register';
 
