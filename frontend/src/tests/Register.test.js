@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Register from '../Components/UserValidation/Register';
 import { BrowserRouter as Router } from 'react-router-dom';
+
 describe(`Test suite for Register component`, () => {
 	beforeEach(() => {
 		render(
