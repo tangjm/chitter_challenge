@@ -21,7 +21,7 @@ describe(`Test suite for AddPeep`, () => {
 		})
 
 		test(`it should render textarea`, () => {
-			const placeholderText = /Your message.../i;
+			const placeholderText = /What's going on?/i;
 			const actual = screen.getByPlaceholderText(placeholderText);
 			expect(actual).toBeInTheDocument();
 		})
@@ -35,7 +35,7 @@ describe(`Test suite for AddPeep`, () => {
 	describe(`Form manipulation tests`, () => {
 		test(`it should register changes to the textarea`, () => {
 			const testMessage = "test peep message";
-			const placeholderText = /your message.../i;
+			const placeholderText = /what's going on?/i;
 			const textArea = screen.getByPlaceholderText(placeholderText);
 			userEvent.type(textArea, testMessage);
 

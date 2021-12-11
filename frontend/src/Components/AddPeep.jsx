@@ -8,10 +8,11 @@ import Button from 'react-bootstrap/Button';
 const AddPeep = ({ baseUrl, user }) => {
 	const [message, setMessage] = useState(``);
 	const [date, setDate] = useState(``);
+	const [validated, setValidated] = useState(false);
 
 	let navigate = useNavigate();
 	let path = `${baseUrl}/addPeep`;
-	const placeholderText = "Your message..."
+	const placeholderText = "What's going on?";
 
 	const postPeep = async () => {
 		try {
@@ -33,32 +34,34 @@ const AddPeep = ({ baseUrl, user }) => {
 
 	const submitHandler = event => {
 		event.preventDefault();
-		// ensure message is not an empty string
 		if (message) {
+			setValidated(false);
 			return postPeep();
 		}
-		// render something to tell the user to enter a valid message
+		setValidated(true);
 	}
 
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setDate(new Date().toISOString());
 		}, 100);
-
 		return () => clearInterval(interval);
 	}, [date]);
 
 	return (
 		<div>
-			<Form className="singlePeep" onSubmit={submitHandler}>
+			<Form noValidate validated={validated} className="singlePeep" onSubmit={submitHandler}>
 				<Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
 					<Form.Label>Your peep:</Form.Label>
 					<Form.Control
 						as="textarea"
 						placeholder={placeholderText} rows={3}
 						onChange={event => setMessage(event.target.value)}
-					// isInvalid={}
+						required
 					/>
+					<Form.Control.Feedback type="invalid">
+						Please enter a valid message
+					</Form.Control.Feedback>
 				</Form.Group>
 				<Button as="input" type="submit" value="Post" />{' '}
 			</Form>
@@ -74,4 +77,5 @@ AddPeep.propTypes = {
 		"username": PropTypes.string
 	})
 }
+
 export default AddPeep;
