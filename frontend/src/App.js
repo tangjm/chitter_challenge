@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import axios from 'axios';
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from '../src/Components/Header';
@@ -23,13 +22,13 @@ function App() {
 
   return (
     <div className="App-header">
-      <Header isLoggedIn={isLoggedIn} setUser={setUser} defaultUser={defaultUser} />
-      &nbsp;
       <Router>
+        <Header isLoggedIn={isLoggedIn} setUser={setUser} defaultUser={defaultUser} />
+        &nbsp;
         <Routes>
           <Route path="/" element={<AllPeeps baseUrl={baseUrl} />} />
           <Route path="/addPeep" element={<AddPeep baseUrl={baseUrl} user={user} />} />
-          <Route path="/login" element={<Login baseUrl={baseUrl} />} />
+          <Route path="/login" element={<Login baseUrl={baseUrl} setUser={setUser} />} />
           <Route path="/register" element={<Register baseUrl={baseUrl} />} />
         </Routes>
       </Router>

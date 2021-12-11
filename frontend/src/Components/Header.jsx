@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Navbar from 'react-bootstrap/NavBar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const Header = ({ isLoggedIn, setUser, defaultUser }) => {
 
@@ -12,12 +13,25 @@ const Header = ({ isLoggedIn, setUser, defaultUser }) => {
 		<header className="header">
 			<Navbar bg="primary" variant="dark">
 				<Container>
-					<Navbar.Brand href="/">Chitter</Navbar.Brand>
+					<LinkContainer to="/">
+						<Navbar.Brand >Chitter</Navbar.Brand>
+					</LinkContainer>
 					<Nav className="ms-auto">
-						<Nav.Link href="/addPeep">New Peep</Nav.Link>
-						{isLoggedIn ? <Nav.Link href="/" onClick={logOutHandler}>Log Out</Nav.Link>
-							: <><Nav.Link href="/login" >Login</Nav.Link>
-								<Nav.Link href="/register">Register</Nav.Link></>}
+						<LinkContainer to="/addPeep">
+							<Nav.Link>New Peep</Nav.Link>
+						</LinkContainer>
+						{isLoggedIn ?
+							<LinkContainer to="/">
+								<Nav.Link onClick={logOutHandler}>Log Out</Nav.Link>
+							</LinkContainer>
+							: <>
+								<LinkContainer to="/login">
+									<Nav.Link  >Login</Nav.Link>
+								</LinkContainer>
+								<LinkContainer to="/register">
+									<Nav.Link>Register</Nav.Link>
+								</LinkContainer>
+							</>}
 					</Nav>
 				</Container>
 			</Navbar>
