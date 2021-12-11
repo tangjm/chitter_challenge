@@ -14,7 +14,7 @@ const ErrorModal = ({ show, setShow, errorMessage, errorTitle }) => {
 			</Modal.Header>
 			<Modal.Body>{errorMessage}</Modal.Body>
 			<Modal.Footer>
-				<Button variant="secondary" onClick={handleClose}>
+				<Button variant="danger" onClick={handleClose}>
 					Close
 				</Button>
 			</Modal.Footer>
