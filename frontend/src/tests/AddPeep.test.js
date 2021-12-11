@@ -43,11 +43,15 @@ describe(`Test suite for AddPeep`, () => {
 		})
 	})
 
-	xdescribe(`Peep submission tests for AddPeep`, () => {
-		test(`it should call`, () => {
-			const labelText = /your peep:/i;
-			const actual = screen.getByLabelText(labelText);
-			expect(actual).toBeInTheDocument();
+	describe(`Peep submission tests for AddPeep`, () => {
+		test(`it should render an error meesage if the user tries to post an empty message`, () => {
+			const buttonText = /post/i;
+			const postButton = screen.getByText(buttonText);
+
+			userEvent.click(postButton);
+
+			const errorMessage = screen.getByText(/please enter a valid message/i);
+			expect(errorMessage).toBeInTheDocument();
 		})
 
 	})
