@@ -24,21 +24,21 @@ describe(`Test suite for Register component`, () => {
 		test(`it should display a username input field`, () => {
 			render(<Register />);
 			const username = "Username";
-			const actual = screen.getByPlaceholderText(username);
+			const actual = screen.getByLabelText(username);
 			expect(actual).toBeInTheDocument();
 		})
 
 		test(`it should display an email input`, () => {
 			render(<Register />);
 			const email = "Email";
-			const actual = screen.getByPlaceholderText(email);
+			const actual = screen.getByLabelText(email);
 			expect(actual).toBeInTheDocument();
 		})
 
 		test(`it should display a password input field`, () => {
 			render(<Register />);
 
-			const actual = screen.getByPlaceholderText(/password/i);
+			const actual = screen.getByLabelText(/password/i);
 			expect(actual).toBeInTheDocument();
 		})
 	})
