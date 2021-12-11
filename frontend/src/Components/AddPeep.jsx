@@ -35,7 +35,6 @@ const AddPeep = ({ baseUrl, user }) => {
 	const submitHandler = event => {
 		event.preventDefault();
 		if (message) {
-			setValidated(false);
 			return postPeep();
 		}
 		setValidated(true);

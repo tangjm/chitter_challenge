@@ -12,13 +12,14 @@ import ErrorModal from './ErrorModal';
 
 const Register = ({ baseUrl }) => {
 	const [showErrorModal, setShowErrorModal] = useState(false);
+	const [validated, setValidated] = useState(false);
 	const [name, setName] = useState(``);
 	const [username, setUsername] = useState(``);
 	const [email, setEmail] = useState(``);
 	const [password, setPassword] = useState(``);
 	const navigate = useNavigate();
 	const errorTitle = "Sign up failed";
-	const errorMessage = "Please enter a valid username/email";
+	const errorMessage = "Username or email might be taken";
 
 	const registerUser = async () => {
 		try {
@@ -41,19 +42,27 @@ const Register = ({ baseUrl }) => {
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		registerUser();
+		if (name && username && email && password) {
+			return registerUser();
+		}
+		setValidated(true);
 	}
 
 	return (
 		<>
-			<ErrorModal show={showErrorModal} setShow={setShowErrorModal} errorMessage={errorMessage} errorTitle={errorTitle} />
+			<ErrorModal show={showErrorModal} setShow={setShowErrorModal}
+				errorMessage={errorMessage} errorTitle={errorTitle} />
 			<h2 className="mb-4">Sign Up!</h2>
-			<Form onSubmit={handleSubmit}>
+			<Form noValidate validated={validated} onSubmit={handleSubmit}>
 				<Row className="align-items-center">
 					<Col xs="auto">
 						<InputGroup className="mb-4">
 							<FloatingLabel className="floatingLabel" controlId="floatingInputGrid" label="Name">
-								<Form.Control type="text" placeholder="Name" onChange={event => setName(event.target.value)} required />
+								<Form.Control type="text" placeholder="Name"
+									onChange={event => setName(event.target.value)} required />
+								<Form.Control.Feedback type="invalid">
+									Please enter a valid name
+								</Form.Control.Feedback>
 							</FloatingLabel>
 						</InputGroup>
 					</Col>
@@ -66,6 +75,9 @@ const Register = ({ baseUrl }) => {
 									onChange={event => setUsername(event.target.value)}
 									required
 								/>
+								<Form.Control.Feedback type="invalid">
+									Please enter a valid username
+								</Form.Control.Feedback>
 							</FloatingLabel>
 						</InputGroup>
 					</Col>
@@ -78,6 +90,9 @@ const Register = ({ baseUrl }) => {
 								<Form.Control type="email" placeholder="Email"
 									onChange={event => setEmail(event.target.value)}
 									required />
+								<Form.Control.Feedback type="invalid">
+									Please enter a valid email address
+								</Form.Control.Feedback>
 							</FloatingLabel>
 						</InputGroup>
 					</Col>
@@ -104,4 +119,5 @@ const Register = ({ baseUrl }) => {
 Register.propTypes = {
 	baseUrl: PropTypes.string,
 }
+
 export default Register;
