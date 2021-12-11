@@ -5,25 +5,28 @@ import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-const Login = ({ baseUrl }) => {
+
+const Login = ({ baseUrl, setUser, setIsLoggedIn }) => {
 	const [email, setEmail] = useState(``);
 	const [password, setPassword] = useState(``);
 	const navigate = useNavigate();
 
 	const loginRequest = async () => {
 		try {
-			console.log(baseUrl);
-			console.log(`${baseUrl}/login`)
-			const res = await axios.post(`${baseUrl}/login`, {
-				email: email,
-				password: password
-			});
+			const res = await axios.post(`${baseUrl}/login`, { email, password });
+
 			if (res.status === 200) {
+				successHandler(res.data.user);
 				return navigate(`/`);
 			}
 		} catch (err) {
 			console.log(err);
 		}
+	}
+
+	function successHandler({ name, username }) {
+		setIsLoggedIn(true);
+		setUser({ name, username });
 	}
 
 	const handleSubmit = event => {
@@ -58,5 +61,7 @@ const Login = ({ baseUrl }) => {
 
 Login.propTypes = {
 	baseUrl: PropTypes.string,
+	setUser: PropTypes.func,
+	setIsLoggedIn: PropTypes.func,
 }
 export default Login;
