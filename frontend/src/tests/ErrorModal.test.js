@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ErrorModal from '../Components/UserValidation/ErrorModal';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 const mockSetShow = jest.fn();
 
@@ -36,6 +35,14 @@ describe(`Test suite for Modal`, () => {
 			expect(modalButton).toBeInTheDocument();
 		})
 
+		test(`it should call the mockSetShow function when the close button is clicked`, () => {
+			const modalButton = screen.getByText(/close/i);
+
+			userEvent.click(modalButton);
+
+			expect(mockSetShow).toHaveBeenCalledTimes(1);
+			expect(mockSetShow).toHaveBeenCalledWith(false);
+		})
 	})
 
 })
