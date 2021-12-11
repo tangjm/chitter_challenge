@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 
 const AllPeeps = ({ baseUrl }) => {
 	const jsonServer = `http://localhost:4000/allPeeps`;
-	const path = `${baseUrl}allPeeps`;
+	const path = `${baseUrl}/allPeeps`;
 	const servers = [jsonServer, path];
 
 	const [peeps, setPeeps] = useState([]);
@@ -14,7 +14,6 @@ const AllPeeps = ({ baseUrl }) => {
 		try {
 			const res = await axios.get(servers[1]);
 			if (res.data) {
-				console.log(res.data);
 				return res.data;
 			}
 		} catch (err) {
@@ -37,7 +36,7 @@ const AllPeeps = ({ baseUrl }) => {
 			[],
 			{ hour: '2-digit', minute: '2-digit' }
 		)
-		return `${neatDate} [${neatTime}]`;
+		return `${neatDate} (${neatTime})`;
 	}
 
 	const formatPeeps = peeps => {

@@ -10,7 +10,7 @@ const AddPeep = ({ baseUrl, user }) => {
 	const [date, setDate] = useState(``);
 
 	let navigate = useNavigate();
-	let path = `${baseUrl}addPeep`;
+	let path = `${baseUrl}/addPeep`;
 	const placeholderText = "Your message..."
 
 	const postPeep = async () => {
