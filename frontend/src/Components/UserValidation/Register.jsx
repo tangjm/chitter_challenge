@@ -31,6 +31,7 @@ const Register = () => {
 							<InputGroup.Text>@</InputGroup.Text>
 							<FloatingLabel className="floatingLabel" controlId="floatingSelectGrid" label="Username">
 								<Form.Control type="text" placeholder="Username"
+									onChange={event => setUsername(event.target.value)}
 								/>
 							</FloatingLabel>
 						</InputGroup>
@@ -41,14 +42,16 @@ const Register = () => {
 					<Col xs="auto">
 						<InputGroup className="mb-4">
 							<FloatingLabel className="floatingLabel" controlId="floatingEmailLabel" label="Email">
-								<Form.Control type="email" placeholder="Email" />
+								<Form.Control type="email" placeholder="Email"
+									onChange={event => setEmail(event.target.value)} />
 							</FloatingLabel>
 						</InputGroup>
 					</Col>
 					<Col xs="auto">
 						<InputGroup className="mb-4">
 							<FloatingLabel className="floatingLabel" controlId="floatingInputGrid" label="Password">
-								<Form.Control type="password" placeholder="Password" />
+								<Form.Control type="password" placeholder="Password"
+									onChange={event => setPassword(event.target.value)} />
 							</FloatingLabel>
 						</InputGroup>
 					</Col>
