@@ -8,13 +8,17 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import InputGroup from 'react-bootstrap/InputGroup';
+import ErrorModal from './ErrorModal';
 
 const Register = ({ baseUrl }) => {
+	const [showErrorModal, setShowErrorModal] = useState(false);
 	const [name, setName] = useState(``);
 	const [username, setUsername] = useState(``);
 	const [email, setEmail] = useState(``);
 	const [password, setPassword] = useState(``);
 	const navigate = useNavigate();
+	const errorTitle = "Sign up failed";
+	const errorMessage = "Please enter a valid username/email";
 
 	const registerUser = async () => {
 		try {
@@ -24,15 +28,15 @@ const Register = ({ baseUrl }) => {
 				email: email,
 				password: password
 			});
-
-			if (res.status === 200) {
-				return navigate(`/login`);
-			}
-
-			if (res.status === 400) { }
+			return navigate(`/login`);
 		} catch (err) {
 			console.log(err);
+			return failureHandler();
 		}
+	}
+
+	function failureHandler() {
+		setShowErrorModal(true);
 	}
 
 	const handleSubmit = event => {
@@ -42,21 +46,15 @@ const Register = ({ baseUrl }) => {
 
 	return (
 		<>
+			<ErrorModal show={showErrorModal} setShow={setShowErrorModal} errorMessage={errorMessage} errorTitle={errorTitle} />
 			<h2 className="mb-4">Sign Up!</h2>
 			<Form onSubmit={handleSubmit}>
 				<Row className="align-items-center">
 					<Col xs="auto">
-						<InputGroup className="mb-4" hasValidation>
+						<InputGroup className="mb-4">
 							<FloatingLabel className="floatingLabel" controlId="floatingInputGrid" label="Name">
-								<Form.Control type="text" placeholder="Name" onChange={event => setName(event.target.value)}
-									required
-									isInvalid={false} />
-								{/* Work in progess: custom validation error messages and css */}
-								<Form.Control.Feedback type="invalid" style={{ color: "red" }}>
-									Please choose a name.
-								</Form.Control.Feedback>
+								<Form.Control type="text" placeholder="Name" onChange={event => setName(event.target.value)} required />
 							</FloatingLabel>
-
 						</InputGroup>
 					</Col>
 

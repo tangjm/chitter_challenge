@@ -3,6 +3,12 @@ import userEvent from '@testing-library/user-event';
 import Register from '../Components/UserValidation/Register';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+jest.mock(`../Components/UserValidation/ErrorModal.jsx`, () => {
+	return function () {
+		return <span>Mock ErrorModal Component</span>
+	}
+})
+
 describe(`Test suite for Register component`, () => {
 	beforeEach(() => {
 		render(
@@ -87,7 +93,53 @@ describe(`Test suite for Register component`, () => {
 		})
 	})
 
-	xdescribe(`Form submission tests`, () => {
+	describe(`Form submission tests`, () => {
+		test(`it should render an ErrorModal if username already exists`, () => {
+			const name = "testName";
+			const duplicateUsername = "testUsername";
+			const email = "testEmail@mail.com";
+			const password = "password";
 
+			const nameInput = screen.getByPlaceholderText("Name");
+			const usernameInput = screen.getByPlaceholderText("Username");
+			const emailInput = screen.getByPlaceholderText(/email/i);
+			const passwordInput = screen.getByPlaceholderText(/password/i);
+
+			userEvent.type(nameInput, name);
+			userEvent.type(usernameInput, duplicateUsername);
+			userEvent.type(emailInput, email);
+			userEvent.type(passwordInput, password);
+
+			const mockErrorModal = screen.getByText(/mock errormodal component/i);
+			expect(mockErrorModal).toBeInTheDocument();
+		})
+
+		test(`it should render an ErrorModal if email already exists`, () => {
+			const name = "testName";
+			const username = "newUsername";
+			const duplicateEmail = "test@mail.com";
+			const password = "password";
+
+			const nameInput = screen.getByPlaceholderText("Name");
+			const usernameInput = screen.getByPlaceholderText("Username");
+			const emailInput = screen.getByPlaceholderText(/email/i);
+			const passwordInput = screen.getByPlaceholderText(/password/i);
+
+			userEvent.type(nameInput, name);
+			userEvent.type(usernameInput, username);
+			userEvent.type(emailInput, duplicateEmail);
+			userEvent.type(passwordInput, password);
+
+			const mockErrorModal = screen.getByText(/mock errormodal component/i);
+			expect(mockErrorModal).toBeInTheDocument();
+		})
+
+		xtest(`it should navigate to homepage if registration is successful`, () => {
+
+		})
+
+		xtest(`it should call setUserIsLoggedIn with true if login is successful`, () => {
+
+		})
 	})
 })
