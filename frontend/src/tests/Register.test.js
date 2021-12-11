@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Register from '../Components/UserValidation/Register';
 
 describe(`Test suite for Register component`, () => {
@@ -7,7 +8,7 @@ describe(`Test suite for Register component`, () => {
 	})
 
 	describe(`Render tests`, () => {
-		test(`it should display a h1 title 'Sign Up'`, () => {
+		test(`it should display a h2 title 'Sign Up'`, () => {
 			render(<Register />);
 
 			const actual = screen.getByText(/sign up/i);
@@ -40,6 +41,21 @@ describe(`Test suite for Register component`, () => {
 
 			const actual = screen.getByLabelText(/password/i);
 			expect(actual).toBeInTheDocument();
+		})
+	})
+
+	describe(`Form manipulation tests`, () => {
+		test(`it should track changes to name input field`, () => {
+			const testName = "tester";
+			const placeholder = "Name";
+
+			render(<Register />);
+
+			const testElement = screen.getByPlaceholderText(placeholder);
+
+			userEvent.type(testElement, testName);
+
+			expect(testElement).toHaveValue(testName);
 		})
 	})
 })
