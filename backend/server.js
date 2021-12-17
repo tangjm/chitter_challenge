@@ -3,11 +3,10 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const express = require('express');
 
-const addPeepRouter = require('./routes/addPeep');
-const allPeepsRouter = require('./routes/allPeeps');
-const singlePeepRouter = require('./routes/singlePeep')
-const loginRouter = require('./routes/login');
-const registerRouter = require('./routes/register');
+
+const authRouter = require('./routes/authentication/auth.route');
+const userRouter = require('./routes/authentication/user.route.js');
+
 const Role = require('./models/role.model');
 
 const host = process.env.HOST;
@@ -16,6 +15,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const initial = () => {
 	Role.estimatedDocumentCount((err, count) => {
@@ -36,13 +36,8 @@ initial();
 
 // routes
 
-// app.use(`/auth/signup`)
-
-app.use(`/allPeeps`, allPeepsRouter);
-app.use(`/addPeep`, addPeepRouter);
-app.use(`/singlePeep`, singlePeepRouter);
-app.use(`/login`, loginRouter);
-app.use(`/register`, registerRouter);
+app.use(`/auth`, authRouter);
+app.use(`/auth/content`, userRouter);
 
 const main = async () => {
 	console.log(`Connecting to DB: ${process.env.DB_URI}`);
