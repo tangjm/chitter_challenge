@@ -9,7 +9,6 @@ const allPeepsRouter = require('./routes/allPeeps');
 const singlePeepRouter = require('./routes/singlePeep')
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
-const Role = require('./models/role.model');
 
 const host = process.env.HOST;
 const port = process.env.PORT;
@@ -17,23 +16,6 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-const initial = () => {
-	Role.estimatedDocumentCount((err, count) => {
-		if (!err && count === 0) {
-			new Role({
-				name: `user`
-			}).save(err => {
-				if (err) {
-					console.log(`error`, err);
-				}
-				console.log(`Added 'user' to roles collection`);
-			});
-		}
-	});
-}
-
-initial();
 
 // routes
 
