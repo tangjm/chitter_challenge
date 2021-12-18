@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-const AddPeep = ({ baseUrl, user }) => {
+const AddPeep = ({ baseUrl }) => {
 	const [message, setMessage] = useState(``);
 	const [date, setDate] = useState(``);
 	const [validated, setValidated] = useState(false);
@@ -15,15 +15,18 @@ const AddPeep = ({ baseUrl, user }) => {
 	const placeholderText = "What's going on?";
 
 	const postPeep = async () => {
+		const { name, username } = JSON.parse(localStorage.getItem(`user`)).user
+		const token = JSON.parse(localStorage.getItem(`user`)).accessToken;
+		const headers = { headers: { "x-access-token": token } };
 		try {
 			const res = await axios.post(path, {
 				"message": message,
-				"sender": user,
+				"sender": { name, username },
 				"date": date,
 				"metaData": {
 					"isReply": false
 				}
-			})
+			}, headers);
 			if (res.status === 200) {
 				return navigate("/");
 			}
@@ -71,10 +74,6 @@ const AddPeep = ({ baseUrl, user }) => {
 
 AddPeep.propTypes = {
 	baseUrl: PropTypes.string,
-	user: PropTypes.exact({
-		"name": PropTypes.string,
-		"username": PropTypes.string
-	})
 }
 
 export default AddPeep;

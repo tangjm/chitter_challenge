@@ -5,12 +5,11 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import { LinkContainer } from 'react-router-bootstrap';
 
-const Header = ({ isLoggedIn, setIsLoggedIn, setUser, defaultUser }) => {
+const Header = ({ isLoggedIn, setIsLoggedIn }) => {
 
 	const logOutHandler = event => {
 		localStorage.removeItem(`user`);
 		setIsLoggedIn(false);
-		setUser(defaultUser);
 	}
 
 	return (
@@ -46,11 +45,6 @@ const Header = ({ isLoggedIn, setIsLoggedIn, setUser, defaultUser }) => {
 Header.propTypes = {
 	isLoggedIn: PropTypes.bool,
 	setIsLoggedIn: PropTypes.func,
-	setUser: PropTypes.func,
-	defaultUser: PropTypes.exact({
-		name: PropTypes.string,
-		username: PropTypes.string
-	})
 }
 
 export default Header;
