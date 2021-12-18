@@ -1,20 +1,25 @@
-[
+const bcrypt = require('bcryptjs');
+const hash = bcrypt.hashSync("password", 8);
+
+const sampleUsers = [
 	{
 		"name": "jared",
 		"username": "tangjm",
-		"password": "password",
+		"password": hash,
 		"email": "jared@mail.com"
 	},
 	{
 		"name": "jason",
 		"username": "jason2000",
-		"password": "password",
+		"password": hash,
 		"email": "jason@mail.com"
 	},
 	{
 		"name": "anonymous",
 		"username": "anon88",
-		"password": "password",
+		"password": hash,
 		"email": "anon@mail.com"
 	}
 ]
+
+module.exports = sampleUsers;

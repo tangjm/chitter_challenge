@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const chai = require('chai')
 const chaiHttp = require('chai-http');
-const sampleUsers = require('./testData/sampleUsers.json');
+const sampleUsers = require('./testData/sampleUsers');
 const invalidUsers = require('./testData/invalidLoginData.json');
 const server = require('../server');
 const User = require('../models/user.model');
