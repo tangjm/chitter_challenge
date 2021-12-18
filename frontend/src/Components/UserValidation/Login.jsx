@@ -71,4 +71,5 @@ Login.propTypes = {
 	setUser: PropTypes.func,
 	setIsLoggedIn: PropTypes.func,
 }
+
 export default Login;

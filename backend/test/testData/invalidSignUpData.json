@@ -3,12 +3,18 @@
 		"name": "test",
 		"username": "testUsername",
 		"email": "jared@mail.com",
-		"password": "password"
+		"password": "password",
+		"roles": [
+			"user"
+		]
 	},
 	"duplicateUsername": {
 		"name": "test",
 		"username": "testUsername",
 		"email": "jared@mail.com",
-		"password": "password"
+		"password": "password",
+		"roles": [
+			"user"
+		]
 	}
 }

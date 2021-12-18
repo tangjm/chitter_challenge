@@ -3,18 +3,27 @@
 		"name": "jared",
 		"username": "tangjm",
 		"password": "password",
-		"email": "jared@mail.com"
+		"email": "jared@mail.com",
+		"roles": [
+			"61bccdc7a754d16c108a211f"
+		]
 	},
 	{
 		"name": "jason",
 		"username": "jason2000",
 		"password": "password",
-		"email": "jason@mail.com"
+		"email": "jason@mail.com",
+		"roles": [
+			"61bccdc7a754d16c108a211y"
+		]
 	},
 	{
 		"name": "anonymous",
 		"username": "anon88",
 		"password": "password",
-		"email": "anon@mail.com"
+		"email": "anon@mail.com",
+		"roles": [
+			"61bccdc7a754d16c108a211fz"
+		]
 	}
 ]

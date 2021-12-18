@@ -21,7 +21,7 @@ const testPeep = {
 	}
 }
 
-describe(`Tests for addPeep route`, () => {
+xdescribe(`Tests for addPeep route`, () => {
 	beforeEach(async () => {
 		await Peep.deleteMany()
 			.then(() => console.log(`Emptied DB`))

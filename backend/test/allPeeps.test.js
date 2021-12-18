@@ -8,7 +8,7 @@ const samplePeeps = require('./testData/samplePeeps.json');
 chai.use(chaiHttp);
 const path = '/allPeeps';
 
-describe(`Tests for allPeeps route`, () => {
+xdescribe(`Tests for allPeeps route`, () => {
 	beforeEach(async () => {
 		await Peep.deleteMany()
 			.then(() => console.log(`Emptied DB`))

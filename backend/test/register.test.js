@@ -12,7 +12,8 @@ const testNewUser = {
 	"name": "testName",
 	"username": "testUsername",
 	"email": "test@mail.com",
-	"password": "testPass"
+	"password": "testPass",
+	"roles": ["user"]
 }
 
 describe(`Test suite for /login route`, () => {
@@ -31,9 +32,9 @@ describe(`Test suite for /login route`, () => {
 			})
 	})
 
-	it(`/POST to /register should return status 200 and an object with a success message`, async () => {
+	it(`/POST to /auth/register should return status 200 and an object with a success message`, async () => {
 		const res = await chai.request(server)
-			.post(`/register`)
+			.post(`/auth/register`)
 			.send(testNewUser)
 
 		expect(res).to.have.status(200);
@@ -41,9 +42,9 @@ describe(`Test suite for /login route`, () => {
 		expect(res.body).to.have.property("message", "registration successful!");
 	})
 
-	it(`/POST to /register should return status 400 and an error obj if email is taken`, async () => {
+	it(`/POST to /auth/register should return status 400 and an error obj if email is taken`, async () => {
 		const res = await chai.request(server)
-			.post(`/register`)
+			.post(`/auth/register`)
 			.send(invalidNewUsers.duplicateEmail);
 
 		expect(res).to.have.status(400);
@@ -51,9 +52,9 @@ describe(`Test suite for /login route`, () => {
 		expect(res.body).to.have.property("message", "invalid registration details");
 	})
 
-	it(`/POST to /register should return status 400 and an error obj if username is taken`, async () => {
+	it(`/POST to /auth/register should return status 400 and an error obj if username is taken`, async () => {
 		const res = await chai.request(server)
-			.post(`/register`)
+			.post(`/auth/register`)
 			.send(invalidNewUsers.duplicateUsername);
 
 		expect(res).to.have.status(400);

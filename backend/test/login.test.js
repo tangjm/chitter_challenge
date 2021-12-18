@@ -13,7 +13,7 @@ const testUser = {
 	"password": "password"
 }
 
-describe(`Test suite for /login route`, () => {
+xdescribe(`Test suite for /login route`, () => {
 	beforeEach(async () => {
 		await User.deleteMany()
 			.then(() => console.log(`Emptied Collection`))
