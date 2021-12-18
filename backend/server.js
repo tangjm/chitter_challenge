@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const express = require('express');
 
+const verifyToken = require('./middlewares/verifyJWT');
 const addPeepRouter = require('./routes/addPeep');
 const allPeepsRouter = require('./routes/allPeeps');
 const singlePeepRouter = require('./routes/singlePeep')
@@ -36,13 +37,21 @@ initial();
 
 // routes
 
-// app.use(`/auth/signup`)
+app.use((req, res, next) => {
+	res.header(
+		`Access-Control-Allow-Headers`,
+		`x-access-token, Origin, Content-Type, Accept`
+	);
+	next();
+})
 
-app.use(`/allPeeps`, allPeepsRouter);
-app.use(`/addPeep`, addPeepRouter);
-app.use(`/singlePeep`, singlePeepRouter);
 app.use(`/login`, loginRouter);
 app.use(`/register`, registerRouter);
+
+app.use(`/allPeeps`, allPeepsRouter);
+app.use(`/addPeep`, verifyToken, addPeepRouter);
+app.use(`/singlePeep`, verifyToken, singlePeepRouter);
+
 
 const main = async () => {
 	console.log(`Connecting to DB: ${process.env.DB_URI}`);
