@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 const { emailRegex } = require('../js/regularExpressions');
 const User = require('../models/user.model');
@@ -35,7 +36,9 @@ router.route(`/`)
 				})
 			}
 
-			if (password !== user.password) {
+			const passIsCorrect = bcrypt.compareSync(password, user.password);
+
+			if (!passIsCorrect) {
 				return res.status(400).json({
 					"message": "invalid password"
 				})
