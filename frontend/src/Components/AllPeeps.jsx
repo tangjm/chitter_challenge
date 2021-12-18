@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 
 const AllPeeps = () => {
-
 	const [peeps, setPeeps] = useState([]);
 	const path = `${process.env.REACT_APP_NODESERVER}/allPeeps`;
 
@@ -35,7 +34,7 @@ const AllPeeps = () => {
 
 	const formatPeeps = peeps => {
 		if (!peeps.length) {
-			return <span>No Peeps Found</span>;
+			return <span>No peeps have been posted yet</span>;
 		}
 		peeps.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 		return peeps.map(peep => {
