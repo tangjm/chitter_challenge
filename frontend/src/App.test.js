@@ -19,12 +19,12 @@ describe(`Tests for App component`, () => {
   });
 
   describe(`Render tests`, () => {
-    test(`it should render AllPeeps component`, () => {
+    test(`it should render the AllPeeps component`, () => {
       const mockAllPeeps = screen.getByText(/Mock AllPeeps Component/i);
       expect(mockAllPeeps).toBeInTheDocument();
     })
 
-    test(`it should render Header component`, () => {
+    test(`it should render the Header component`, () => {
       const mockHeader = screen.getByText(/Mock Header Component/i);
       expect(mockHeader).toBeInTheDocument();
     })
