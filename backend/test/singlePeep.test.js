@@ -12,7 +12,7 @@ const testId1 = "61b08a1a69be7e8ac59cc73d";
 // const testId2 = "61b08a1a69be7e8ac59cc73e";
 // const testId3 = "61b08a1a69be7e8ac59cc73f";
 
-describe(`Tests for /singlePeep route`, () => {
+xdescribe(`Tests for /singlePeep route`, () => {
 	beforeEach(async () => {
 		await Peep.deleteMany()
 			.then(() => console.log(`Emptied DB`))
