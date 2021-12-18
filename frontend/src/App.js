@@ -9,26 +9,18 @@ import Login from './Components/UserValidation/Login';
 import Register from './Components/UserValidation/Register';
 
 function App() {
-  const defaultUser = {
-    "name": "anonymous",
-    "username": "anon"
-  };
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(defaultUser);
-
-  const baseUrl = process.env.REACT_APP_NODESERVER;
 
   return (
     <div className="App-header">
       <Router>
-        <Header isLoggedIn={isLoggedIn} setUser={setUser} defaultUser={defaultUser} />
+        <Header isLoggedIn={isLoggedIn} />
         &nbsp;
         <Routes>
-          <Route path="/" element={<AllPeeps baseUrl={baseUrl} />} />
-          <Route path="/addPeep" element={<AddPeep baseUrl={baseUrl} user={user} />} />
-          <Route path="/login" element={<Login baseUrl={baseUrl} setUser={setUser} setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="/register" element={<Register baseUrl={baseUrl} />} />
+          <Route path="/" element={<AllPeeps />} />
+          <Route path="/addPeep" element={<AddPeep />} />
+          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
     </div >

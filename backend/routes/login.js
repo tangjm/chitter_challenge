@@ -1,4 +1,6 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const { emailRegex } = require('../js/regularExpressions');
 const User = require('../models/user.model');
@@ -35,13 +37,17 @@ router.route(`/`)
 				})
 			}
 
-			if (password !== user.password) {
+			const passIsCorrect = bcrypt.compareSync(password, user.password);
+
+			if (!passIsCorrect) {
 				return res.status(400).json({
 					"message": "invalid password"
 				})
 			}
 
-			return res.status(200).json({ user });
+			const token = jwt.sign({ id: user._id }, process.env.SECRET, { expiresIn: 86400 });
+
+			return res.status(200).json({ user, accessToken: token });
 		})
 	})
 

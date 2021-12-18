@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 const { emailRegex } = require('../js/regularExpressions');
 const User = require('../models/user.model');
@@ -22,7 +23,7 @@ router.route(`/`)
 			});
 		}
 
-		const { email, username } = req.body;
+		const { name, email, username, password } = req.body;
 
 		User.findOne({ $or: [{ email }, { username }] },
 			(error, user) => {
@@ -32,7 +33,14 @@ router.route(`/`)
 					})
 				}
 
-				const newUser = new User(req.body);
+				const hash = bcrypt.hashSync(password, 8);
+
+				const newUser = new User({
+					name,
+					email,
+					username,
+					password: hash
+				});
 
 				newUser.save(err => {
 					if (err) {

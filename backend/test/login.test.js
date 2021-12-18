@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const chai = require('chai')
 const chaiHttp = require('chai-http');
-const sampleUsers = require('./testData/sampleUsers.json');
+const sampleUsers = require('./testData/sampleUsers');
 const invalidUsers = require('./testData/invalidLoginData.json');
 const server = require('../server');
 const User = require('../models/user.model');
@@ -29,7 +29,7 @@ describe(`Test suite for /login route`, () => {
 			})
 	})
 
-	it(`/POST to /login should return status 200 and a user object`, async () => {
+	it(`/POST to /login should return status 200, a user object and an access token`, async () => {
 		const res = await chai.request(server)
 			.post(`/login`)
 			.send(testUser)
@@ -37,6 +37,7 @@ describe(`Test suite for /login route`, () => {
 		expect(res).to.have.status(200);
 		expect(res.body).to.be.an("object");
 		expect(res.body).to.have.property("user");
+		expect(res.body).to.have.property("accessToken");
 	})
 
 	it(`/POST to /login should return status 400 and an error obj if email is invalid`, async () => {
