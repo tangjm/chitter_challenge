@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-const AddPeep = ({ baseUrl }) => {
+const AddPeep = () => {
 	const [message, setMessage] = useState(``);
 	const [date, setDate] = useState(``);
 	const [validated, setValidated] = useState(false);
 
 	let navigate = useNavigate();
-	let path = `${baseUrl}/addPeep`;
+	let path = `${process.env.REACT_APP_NODESERVER}/addPeep`;
 	const placeholderText = "What's going on?";
 
 	const postPeep = async () => {
@@ -73,7 +73,7 @@ const AddPeep = ({ baseUrl }) => {
 
 
 AddPeep.propTypes = {
-	baseUrl: PropTypes.string,
+
 }
 
 export default AddPeep;

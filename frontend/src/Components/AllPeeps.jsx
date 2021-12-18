@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 
-const AllPeeps = ({ baseUrl }) => {
+const AllPeeps = () => {
 
 	const [peeps, setPeeps] = useState([]);
-	const path = `${baseUrl}/allPeeps`;
+	const path = `${process.env.REACT_APP_NODESERVER}/allPeeps`;
 
 	const fetchPeeps = async () => {
 		try {
@@ -65,7 +65,7 @@ const AllPeeps = ({ baseUrl }) => {
 }
 
 AllPeeps.propTypes = {
-	baseUrl: PropTypes.string
+
 }
 
 export default AllPeeps;

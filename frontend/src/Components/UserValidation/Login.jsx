@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ErrorModal from './ErrorModal';
 
-const Login = ({ baseUrl, setIsLoggedIn }) => {
+const Login = ({ setIsLoggedIn }) => {
 	const [email, setEmail] = useState(``);
 	const [password, setPassword] = useState(``);
 	const [showErrorModal, setShowErrorModal] = useState(false);
@@ -16,7 +16,7 @@ const Login = ({ baseUrl, setIsLoggedIn }) => {
 
 	const loginRequest = async () => {
 		try {
-			const res = await axios.post(`${baseUrl}/login`, { email, password });
+			const res = await axios.post(`${process.env.REACT_APP_NODESERVER}/login`, { email, password });
 			localStorage.setItem(`user`, JSON.stringify(res.data));
 			return successHandler();
 		} catch (err) {
@@ -67,7 +67,7 @@ const Login = ({ baseUrl, setIsLoggedIn }) => {
 }
 
 Login.propTypes = {
-	baseUrl: PropTypes.string,
 	setIsLoggedIn: PropTypes.func,
 }
+
 export default Login;

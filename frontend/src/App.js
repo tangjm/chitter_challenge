@@ -11,18 +11,16 @@ import Register from './Components/UserValidation/Register';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const baseUrl = process.env.REACT_APP_NODESERVER;
-
   return (
     <div className="App-header">
       <Router>
         <Header isLoggedIn={isLoggedIn} />
         &nbsp;
         <Routes>
-          <Route path="/" element={<AllPeeps baseUrl={baseUrl} />} />
-          <Route path="/addPeep" element={<AddPeep baseUrl={baseUrl} />} />
-          <Route path="/login" element={<Login baseUrl={baseUrl} setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="/register" element={<Register baseUrl={baseUrl} />} />
+          <Route path="/" element={<AllPeeps />} />
+          <Route path="/addPeep" element={<AddPeep />} />
+          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
     </div >

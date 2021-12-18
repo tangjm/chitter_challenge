@@ -10,7 +10,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import InputGroup from 'react-bootstrap/InputGroup';
 import ErrorModal from './ErrorModal';
 
-const Register = ({ baseUrl }) => {
+const Register = () => {
 	const [showErrorModal, setShowErrorModal] = useState(false);
 	const [validated, setValidated] = useState(false);
 	const [name, setName] = useState(``);
@@ -18,12 +18,13 @@ const Register = ({ baseUrl }) => {
 	const [email, setEmail] = useState(``);
 	const [password, setPassword] = useState(``);
 	const navigate = useNavigate();
+
 	const errorTitle = "Sign up failed";
 	const errorMessage = "Username or email might be taken";
 
 	const registerUser = async () => {
 		try {
-			const res = await axios.post(`${baseUrl}/register`, {
+			const res = await axios.post(`${process.env.REACT_APP_NODESERVER}/register`, {
 				name: name,
 				username: username,
 				email: email,
@@ -116,8 +117,6 @@ const Register = ({ baseUrl }) => {
 	)
 }
 
-Register.propTypes = {
-	baseUrl: PropTypes.string,
-}
+Register.propTypes = {}
 
 export default Register;
