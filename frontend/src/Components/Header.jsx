@@ -20,9 +20,11 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
 						<Navbar.Brand >Chitter</Navbar.Brand>
 					</LinkContainer>
 					<Nav className="ms-auto">
-						<LinkContainer to="/addPeep">
-							<Nav.Link>New Peep</Nav.Link>
-						</LinkContainer>
+						{localStorage.getItem(`user`) &&
+							<LinkContainer to="/addPeep">
+								<Nav.Link>New Peep</Nav.Link>
+							</LinkContainer>
+						}
 						{isLoggedIn ?
 							<LinkContainer to="/">
 								<Nav.Link onClick={logOutHandler}>Log Out</Nav.Link>
