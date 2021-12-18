@@ -21,9 +21,9 @@ describe(`Test suite for Header component`, () => {
 			expect(appName).toBeInTheDocument();
 		})
 
-		test(`it should render the New Peep option`, () => {
-			const addPeepOption = screen.getByText(/new peep/i);
-			expect(addPeepOption).toBeInTheDocument();
+		test(`it should not render the New Peep option`, () => {
+			const addPeepOption = screen.queryByText(/new peep/i);
+			expect(addPeepOption).not.toBeInTheDocument();
 		})
 
 		test(`it should render the Log In option`, () => {
@@ -88,22 +88,13 @@ describe(`Test suite for Header component`, () => {
 
 				render(
 					<Router>
-						<Header isLoggedIn={true} setUser={mockSetUser} defaultUser={defaultUser} setIsLoggedIn={mockSetIsLoggedIn} />
+						<Header isLoggedIn={true} setIsLoggedIn={mockSetIsLoggedIn} />
 					</Router>
 				);
 			})
 
 			afterEach(() => {
 				defaultUser = null;
-			})
-
-			test(`it should call the setUser function with the default value`, () => {
-				const logOutNavLink = screen.getByText(/Log Out/i)
-
-				userEvent.click(logOutNavLink);
-
-				expect(mockSetUser).toHaveBeenCalledTimes(1);
-				expect(mockSetUser).toHaveBeenCalledWith(defaultUser);
 			})
 
 			test(`it should set the isLoggedIn state to false`, () => {
