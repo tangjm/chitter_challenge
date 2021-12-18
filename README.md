@@ -43,6 +43,8 @@ Backend
 - Cors
 - Express
 - Express Validator
+- bcryptjs
+- jsonwebtoken
 
 Frontend
 - Axios
