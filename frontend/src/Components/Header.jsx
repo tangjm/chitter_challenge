@@ -8,6 +8,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 const Header = ({ isLoggedIn, setIsLoggedIn, setUser, defaultUser }) => {
 
 	const logOutHandler = event => {
+		localStorage.removeItem(`user`);
 		setIsLoggedIn(false);
 		setUser(defaultUser);
 	}

@@ -17,6 +17,7 @@ const Login = ({ baseUrl, setUser, setIsLoggedIn }) => {
 	const loginRequest = async () => {
 		try {
 			const res = await axios.post(`${baseUrl}/login`, { email, password });
+			localStorage.setItem(`user`, JSON.stringify(res.data));
 			return successHandler(res.data.user);
 		} catch (err) {
 			return failureHandler();
