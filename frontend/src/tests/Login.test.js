@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Login from '../Components/UserValidation/Login';
 import { BrowserRouter as Router } from 'react-router-dom';
-import axios from 'axios';
 
 jest.mock(`../Components/UserValidation/ErrorModal.jsx`, () => {
 	return () => {
@@ -88,8 +87,9 @@ describe(`Test suite for Login component`, () => {
 			expect(mockErrorModal).toBeInTheDocument();
 		})
 
-		test(`it should render an ErrorModal if email is registered but password is incorrect`, () => {
-
+		xtest(`it should render an ErrorModal if email is registered but password is incorrect`, () => {
+			const badEmail = "goodEmail@mail.com";
+			const password = "badPass";
 		})
 
 		xtest(`it should call setUser with the correct details if login is successful`, () => {

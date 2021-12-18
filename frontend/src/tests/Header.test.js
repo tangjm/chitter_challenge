@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event';
 import Header from '../Components/Header';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-const mockSetUser = jest.fn();
 const mockSetIsLoggedIn = jest.fn();
+
 
 describe(`Test suite for Header component`, () => {
 	describe(`When no user is logged in`, () => {
@@ -79,22 +79,12 @@ describe(`Test suite for Header component`, () => {
 		})
 
 		describe(`Log Out test`, () => {
-			let defaultUser;
 			beforeEach(() => {
-				defaultUser = {
-					"name": "anonymous",
-					"username": "anon"
-				}
-
 				render(
 					<Router>
 						<Header isLoggedIn={true} setIsLoggedIn={mockSetIsLoggedIn} />
 					</Router>
 				);
-			})
-
-			afterEach(() => {
-				defaultUser = null;
 			})
 
 			test(`it should set the isLoggedIn state to false`, () => {

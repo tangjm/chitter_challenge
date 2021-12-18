@@ -104,17 +104,19 @@ describe(`Test suite for Register component`, () => {
 			const usernameInput = screen.getByPlaceholderText("Username");
 			const emailInput = screen.getByPlaceholderText(/email/i);
 			const passwordInput = screen.getByPlaceholderText(/password/i);
+			const registerButton = screen.getByText(/create new account/i);
 
 			userEvent.type(nameInput, name);
 			userEvent.type(usernameInput, duplicateUsername);
 			userEvent.type(emailInput, email);
 			userEvent.type(passwordInput, password);
+			userEvent.click(registerButton)
 
 			const mockErrorModal = screen.getByText(/mock errormodal component/i);
 			expect(mockErrorModal).toBeInTheDocument();
 		})
 
-		test(`it should render an ErrorModal if email already exists`, () => {
+		test(`it should render an ErrorModal if email already exists`, async () => {
 			const name = "testName";
 			const username = "newUsername";
 			const duplicateEmail = "test@mail.com";
@@ -124,22 +126,16 @@ describe(`Test suite for Register component`, () => {
 			const usernameInput = screen.getByPlaceholderText("Username");
 			const emailInput = screen.getByPlaceholderText(/email/i);
 			const passwordInput = screen.getByPlaceholderText(/password/i);
+			const registerButton = screen.getByText(/create new account/i);
 
 			userEvent.type(nameInput, name);
 			userEvent.type(usernameInput, username);
 			userEvent.type(emailInput, duplicateEmail);
 			userEvent.type(passwordInput, password);
+			userEvent.click(registerButton)
 
 			const mockErrorModal = screen.getByText(/mock errormodal component/i);
 			expect(mockErrorModal).toBeInTheDocument();
-		})
-
-		xtest(`it should navigate to homepage if registration is successful`, () => {
-
-		})
-
-		xtest(`it should call setUserIsLoggedIn with true if login is successful`, () => {
-
 		})
 	})
 })
