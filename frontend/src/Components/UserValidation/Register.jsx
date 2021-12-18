@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -116,7 +115,5 @@ const Register = () => {
 		</>
 	)
 }
-
-Register.propTypes = {}
 
 export default Register;

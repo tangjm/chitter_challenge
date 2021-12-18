@@ -1,5 +1,4 @@
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -69,11 +68,6 @@ const AddPeep = () => {
 			</Form>
 		</div >
 	)
-}
-
-
-AddPeep.propTypes = {
-
 }
 
 export default AddPeep;

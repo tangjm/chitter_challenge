@@ -1,5 +1,4 @@
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 
@@ -61,10 +60,6 @@ const AllPeeps = () => {
 			{formatPeeps(peeps)}
 		</div>
 	)
-}
-
-AllPeeps.propTypes = {
-
 }
 
 export default AllPeeps;
